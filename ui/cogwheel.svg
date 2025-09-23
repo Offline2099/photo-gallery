@@ -1,0 +1,32 @@
+<svg 
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  width="256px" height="256px" viewBox="0 0 256 256">
+  <defs>
+    <path id='p1' fill="#00b3b3" 
+      d="
+      M 174.39 206.44 
+      C 167.61 210.40 160.41 213.45 152.87 215.55
+      L 152.87 240.85
+      C 152.74 248.65 146.32 255.05 138.42 255.05
+      L 117.57 255.05
+      C 109.67 255.05 103.25 248.65 103.25 240.79 
+      L 103.25 215.48
+      L 109.76 210.47 
+      L 109.76 240.79
+      C 109.76 245.08 113.25 248.55 117.57 248.55 
+      L 138.42 248.55
+      C 142.74 248.55 146.23 245.08 146.23 240.79 
+      L 146.23 210.47 
+      C 157.28 207.71 165.48 204.24 173.04 199.52" />
+  </defs>
+  <use href="#p1"/>
+  <use href="#p1" transform="rotate(45, 128, 128)"/>
+  <use href="#p1" transform="rotate(-45, 128, 128)"/>
+  <use href="#p1" transform="rotate(90, 128, 128)"/>
+  <use href="#p1" transform="rotate(-90, 128, 128)"/>
+  <use href="#p1" transform="rotate(135, 128, 128)"/>
+  <use href="#p1" transform="rotate(-135, 128, 128)"/>
+  <use href="#p1" transform="rotate(180, 128, 128)"/>
+  <circle cx="128" cy="128" r="45" stroke="#00b3b3" stroke-width="7" fill="none"/>
+</svg>
