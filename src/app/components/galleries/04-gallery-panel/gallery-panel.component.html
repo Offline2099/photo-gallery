@@ -1,0 +1,149 @@
+@if (state.isDesktop) {
+
+  <!-- Gallery Name Panel, Settings Toggle Button -->
+  <div class="gallery-name-panel">
+    <div class="gallery-name">{{displayedName()}}</div>
+    <app-control-button
+      class="control-button-right no-text"
+      icon="settings-icon-1.webp"
+      secondIcon="settings-icon-2.webp"
+      (click)="toggleSettingsPanel()"
+    />
+  </div>
+
+  <!-- Settings Panel for Desktop -->
+  @if (state.isPanelVisible) {
+    <div class="settings-panel" [ngClass]="{'full-width': !isDefaultMode()}">
+
+      <!-- Panel Header -->
+      <div class="panel-header">
+        <span>Gallery Settings</span>
+        <span class="x-button" (click)="toggleSettingsPanel()">&#x2716;</span>
+      </div>
+
+      <!-- Gallery Mode -->
+      <div class="panel-block panel-block-right">
+        <div class="panel-block-controls">
+          <span class="panel-block-controls-text">Mode:</span>
+          <app-control-button
+            [isSelected]="isDefaultMode()"
+            text="Default"
+            (click)="toggleGalleryMode()"
+          />
+          <app-control-button
+            [isSelected]="!isDefaultMode()"
+            text="Grid"
+            (click)="toggleGalleryMode()"/>
+        </div>
+        <div class="panel-block-text">
+          Default mode displays the gallery preview on the right and allows to pick an image. Grid mode simply displays all images in the gallery as a grid.
+        </div>
+      </div>
+
+      @if (isDefaultMode()) {
+
+        <!-- Image Info (Default Mode) -->
+        <div class="panel-block">
+          <div class="panel-block-controls">
+            <app-control-button
+              [hasSwitch]="true"
+              [isSwitchOn]="state.showImageInfo"
+              text="Show Image Info"
+              (click)="toggleImageInfo()"
+            />
+          </div>
+          <div class="panel-block-text">
+            Show or hide the information block under the selected image. Knowing exactly what you are looking at often makes it more interesting.
+          </div>
+        </div>
+
+        <!-- No-Click Mode (Default Mode) -->
+        <div class="panel-block">
+          <div class="panel-block-controls">
+            <app-control-button
+              [hasSwitch]="true"
+              [isSwitchOn]="state.isMouseoverSelectAllowed"
+              text="No-Click Mode"
+              (click)="toggleSelectOnMouseover()"
+            />
+          </div>
+          <div class="panel-block-text">
+            Select images automatically without clicking, just by hovering your mouse cursor over the preview. Some people find it convenient, others don't like it.
+          </div>
+        </div>
+
+      } @else {
+
+        <!-- Image Info (Grid Mode) -->
+        <div class="panel-block">
+          <div class="panel-block-controls">
+            <app-control-button
+              [hasSwitch]="true"
+              [isSwitchOn]="state.showImageCaptions"
+              text="Text"
+              (click)="toggleImageCaptions()"
+            />
+            <app-control-button
+              [hasSwitch]="true"
+              [isSwitchOn]="state.showImageData"
+              text="Data"
+              (click)="toggleImageData()"
+            />
+            <app-control-button
+              [hasSwitch]="true"
+              [isSwitchOn]="state.showImageTags"
+              text="Tags"
+              (click)="toggleImageTags()"
+            />
+          </div>
+          <div class="panel-block-text">
+            Show or hide the information blocks under the images. Knowing exactly what you are looking at often makes it more interesting.
+          </div>
+        </div>
+
+        <!-- Images per row (Grid Mode) -->
+        <div class="panel-block">
+          <div class="panel-block-controls">
+            <span class="panel-block-controls-text">Images per Row:</span>
+            @for (button of [].constructor(state.isDesktopWide ? 4 : 3); track $index) {
+              <app-control-button
+                [isSelected]="state.imagesInRow === $index + 1"
+                text="{{$index + 1}}"
+                (click)="setImagesInRow($index + 1)"
+              />
+            }
+          </div>
+          <div class="panel-block-text">
+            Select how many images should be fit into a row. Less images per row means a larger size for each image on the screen.
+          </div>
+        </div>
+      }
+  
+    </div>
+  }
+  
+} @else {
+
+  <!-- Settings Panel for Tablets and Mobile -->
+  <div class="settings-panel-simple">
+    <app-control-button
+      [hasSwitch]="true"
+      [isSwitchOn]="state.showImageCaptions"
+      text="Captions"
+      (click)="toggleImageCaptions()"
+    />
+    <app-control-button
+      [hasSwitch]="true"
+      [isSwitchOn]="state.showImageData"
+      text="Data"
+      (click)="toggleImageData()"
+    />
+    <app-control-button
+      [hasSwitch]="true"
+      [isSwitchOn]="state.showImageTags"
+      text="Tags"
+      (click)="toggleImageTags()" 
+    />
+  </div>
+
+}

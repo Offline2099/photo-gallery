@@ -1,0 +1,29 @@
+@use '../../../../styles-shared' as *;
+
+:host {
+  @include circle(46px);
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5px;
+  border: 2px solid $bg-element;
+  background: $border-dark;
+  color: $text-faint;
+  font-size: 25px;
+  opacity: .9;
+  transition: .3s;
+  cursor: pointer;
+  &.invisible {
+    opacity: 0;
+    pointer-events: none;
+  }
+  @include hover {
+    opacity: 1;
+    color: $text-accent;
+    border-color: $border-accent-bright;
+  }
+}

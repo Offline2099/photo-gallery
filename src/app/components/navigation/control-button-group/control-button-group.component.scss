@@ -1,0 +1,106 @@
+@use '../../../../styles-shared' as *;
+
+:host {
+  display: inline-flex;
+  margin: 5px;
+  border: 2px solid $bg-accent;
+  border-radius: 5px;
+  background: $bg-area;
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+  }
+  @include mobile {
+    width: calc(100% - 5px);
+    margin: 5px 2px 8px 2px;
+    &:last-of-type {
+      margin-bottom: 5px;
+    }
+  }
+}
+
+//=============================================================================
+//  Group Header
+//=============================================================================
+
+.group-header {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: $bg-accent;
+  color: $text-accent;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px $shadow-bright;
+  a {
+    transition: .2s;
+    @include hover {
+      color: $text-bright;
+    }
+  }
+  @include desktop-small {
+    font-size: 18px;
+  }
+  @include tablet {
+    display: flex;
+    flex-basis: 100%;
+    height: 22px;
+    padding-bottom: 2px;
+    text-align: left;
+    font-size: 16px;
+    line-height: 20px;
+    cursor: pointer;
+  }
+}
+
+:host.collapsed {
+  @include tablet {
+    .group-header {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.triangle {
+  height: 22px;
+  margin-right: 10px;
+  font-size: 12px;
+  line-height: 22px;
+  transform: rotate(90deg);
+  transition: .2s;
+}
+
+:host.collapsed .triangle {
+  transform: rotate(0deg);
+  text-shadow: 1px -1px $bg-element;
+}
+
+.label {
+  margin-left: auto;
+  color: $text-accent-dim;
+  font-size: smaller;
+}
+
+//=============================================================================
+//  Group Body
+//=============================================================================
+
+.group-body {
+  padding: 0 2px;
+  a {
+    display: inline-block;
+    margin: 4px 3px;
+  }
+  @include tablet {
+    margin: 3px 0;
+    animation: fade-in .5s;
+  }
+}
+
+:host.collapsed {
+  @include tablet {
+    .group-body {
+      display: none;
+    }
+  }
+}

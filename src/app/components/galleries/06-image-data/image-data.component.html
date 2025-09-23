@@ -1,0 +1,121 @@
+<!-- Decorative Elements -->
+<div class="top-left-corner"></div>
+<div class="bottom-right-corner"></div>
+
+<!-- Tab Layout -->
+@if (hasTabs()) {
+
+  <!-- Caption -->
+  <div class="image-data-column">
+    <div class="image-data-section">{{data().caption}}</div> 
+  </div>
+
+  <!-- Location, Time, Tags -->
+  <div class="image-data-column">
+
+    <!-- Tab Buttons -->
+    <div class="image-data-controls">
+      @for (tab of dataTabs(); track tab.id) {
+        <app-control-button
+          [text]="tab.name"
+          [isSelected]="tab.id === dataTabs()[selectedTabIndex].id"
+          (click)="selectDataTab($index)"
+        />
+      }
+    </div>
+
+    <!-- Data Blocks -->
+    @for (tab of dataTabs(); track tab.id) {
+      @if (tab.id === dataTabs()[selectedTabIndex].id) {
+        <div class="image-data-section data-section-tab">
+          @if (tab.id === ImageDataTabId.location) {
+            <ng-template [ngTemplateOutlet]="locationData" [ngTemplateOutletContext]="{location: data().location}" />
+          }
+          @if (tab.id === ImageDataTabId.time) {
+            <ng-template [ngTemplateOutlet]="timeData" [ngTemplateOutletContext]="{time: time()}" />
+          }
+          @if (tab.id === ImageDataTabId.tags) {
+            <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: data().tags}" />
+          }
+        </div>
+      }
+    }
+    
+  </div>
+} 
+
+<!-- Simple Layout -->
+@else {
+
+  <!-- Caption -->
+  @if (data().caption && dataSettings.showImageCaptions) {
+    <div class="image-data-section">{{data().caption}}</div> 
+  }
+
+  <!-- Data (Location, Time) -->
+  @if (dataSettings.showImageData) {
+
+    <!-- Location -->
+    @if (data().location; as location) {
+      <div class="image-data-section">
+        <ng-template [ngTemplateOutlet]="locationData" [ngTemplateOutletContext]="{location}" />
+      </div>
+    }
+
+    <!-- Time -->
+    @if (galleryType() !== GalleryType.month) {
+      <div class="image-data-section">
+        <ng-template [ngTemplateOutlet]="timeData" [ngTemplateOutletContext]="{time: time()}" />
+      </div>
+    }
+  }
+
+  <!-- Tags -->
+  @if (data().tags?.length && dataSettings.showImageTags) {
+    <div class="image-data-section">
+      <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: data().tags}" />
+    </div>
+  }
+
+}
+
+<!-- Location Template -->
+<ng-template #locationData let-location="location">
+  <div class="icon">
+    <img src="./ui/location-icon.webp" alt="" />
+  </div>
+  <div>
+    <span class="section-element">{{location.name}}</span>
+    @if (location.areaName) {
+      <span class="section-element">{{location.areaName}}</span>
+    }
+    @if (location.coords) {
+      <span class="section-element coordinates">{{coordinates()}}</span>
+    }        
+  </div>
+</ng-template>
+
+<!-- Time Template -->
+<ng-template #timeData let-time="time">
+  <div class="icon">
+    <img src="./ui/calendar-icon.webp" alt="" />
+  </div>
+  <div>
+    <span class="section-element">{{time}}</span>
+  </div>
+</ng-template>
+
+<!-- Tags Template -->
+<ng-template #tagsData let-tags="tags">
+  <div class="icon">
+    <img src="./ui/tag-icon.webp" alt="" />
+  </div>
+  <div>
+    @for (tag of tags; track $index) {
+      <span class="section-element">
+        <span class="marker">&bull; </span>
+        <span class="tag">{{tag}}</span>
+      </span>
+    }
+  </div>
+</ng-template>

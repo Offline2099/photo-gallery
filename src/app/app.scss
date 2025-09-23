@@ -1,0 +1,98 @@
+@use '../styles-shared' as *;
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  & > * {
+    animation: fade-in .5s;
+  }
+}
+
+$header-height: 75px;
+$header-height-tablet: 50px;
+$header-height-mobile: 43px;
+
+@mixin header-or-footer {
+  display: flex;
+  flex-basis: 100%;
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+}
+
+//=============================================================================
+//  Header
+//=============================================================================
+
+header {
+  height: $header-height;
+  padding: 5px 5px 5px 20%;
+  @include header-or-footer;
+  @include bg-smooth-gradient($bg-accent, 20px);
+  a {
+    color: $text-accent-dim;
+    font-size: 40px;
+    letter-spacing: .04em;
+    word-spacing: .2em;
+    text-shadow: 1px 1px $shadow-dark;
+    transition: .2s;
+    @include hover {
+      color: $text-accent;
+    }
+  }
+  @include tablet {
+    height: $header-height-tablet;
+    a {
+      font-size: 26px;
+    }
+  }
+  @include mobile {
+    justify-content: center;
+    height: $header-height-mobile;
+    padding: 3px 5px 5px 5px;
+    a {
+      font-size: 22px;
+    }
+  }
+}
+
+//=============================================================================
+//  Content Area
+//=============================================================================
+
+main {
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  min-height: calc(100vh - $header-height);
+  @include tablet {
+    min-height: calc(100vh - $header-height-tablet);
+  }
+  @include mobile {
+    min-height: calc(100vh - $header-height-mobile);
+  }
+}
+
+//=============================================================================
+//  Footer
+//=============================================================================
+
+footer {
+  height: 110px;
+  margin-top: 5px;
+  padding: 5px 5px 5px 20%;
+  color: $text-dark;
+  font-size: 18px;
+  letter-spacing: .02em;
+  text-shadow: 1px 1px $shadow-dark;
+  @include header-or-footer;
+  @include bg-smooth-gradient($bg-element, 20px);
+  @include tablet {
+    font-size: 16px;
+  }
+  @include mobile {
+    justify-content: center;
+    padding: 5px;
+    font-size: 14px;
+  }
+}

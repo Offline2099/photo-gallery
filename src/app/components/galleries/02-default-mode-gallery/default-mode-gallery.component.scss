@@ -1,0 +1,142 @@
+@use 'sass:color';
+@use '../../../../styles-shared' as *;
+
+:host {
+  display: flex;
+  position: relative;
+}
+
+//=============================================================================
+//  Side Container (Settings & Thumbnails)
+//=============================================================================
+
+.side-container {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 30%;
+  position: relative;
+  top: 0;
+  padding: 0 5px 50vh 5px;
+  animation: fade-in .5s;
+}
+
+//=============================================================================
+//  Thumbnails
+//=============================================================================
+
+$thumbnail-padding: 8px;
+$thumbnail-number-size: 40px;
+
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.thumbnail-container {
+  position: relative;
+  width: 50%;
+  margin-bottom: 6px;
+  padding: $thumbnail-padding;
+  text-align: center;
+  transition: .2s;
+  cursor: pointer;
+  @include hover {
+    .thumbnail {
+      filter: brightness(1.05);
+    }
+    .thumbnail-number {
+      color: $text-bright;
+      background: color.adjust($bg-accent-bright, $alpha: -0.2);
+    }
+  }
+}
+
+.thumbnail {
+  display: inline-block;
+  vertical-align: top;
+  width: calc(100% - 2 * $thumbnail-padding);
+  aspect-ratio: 16/9;
+  color: $text-accent;
+  transition: .2s;
+  @include bg-cells($bg-page, $bg-accent, 6.25%, 11%);
+}
+
+.thumbnail-number {
+  @include overlay($top: unset, $left: unset, $width: $thumbnail-number-size, $height: $thumbnail-number-size);
+  bottom: 5px;
+  right: 10px;
+  padding-left: 8px;
+  border-radius: $thumbnail-number-size 0 0 0;
+  background: color.adjust($bg-area, $alpha: -0.2);
+  color: $text-normal;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 50px;
+  letter-spacing: 0.015em;
+  text-shadow: 1px 1px $shadow-dark;
+  transition: .2s;
+  &.selected {
+    color: $text-bright;
+    background: $bg-accent;
+  }
+}
+
+//=============================================================================
+//  Decorative Thumbnail Overlay
+//=============================================================================
+
+$border-solid: 3px solid $border-accent-bright;
+$border-dotted: 4px dotted $border-accent-bright;
+
+.thumbnail-overlay {
+  @include overlay($top: unset, $left: unset, $width: 0, $height: 0);
+  z-index: 100;
+  opacity: 0;
+  transition: .2s;
+  transition-timing-function: ease-in-out;
+  &.top-left {
+    top: 0;
+    left: 5px;
+    border-top: $border-solid;
+    border-left: $border-solid;
+  }
+  &.top-right {
+    top: 0;
+    right: 5px;
+    border-top: $border-dotted;
+    border-right: $border-dotted;
+  }
+  &.bottom-right {
+    bottom: 0;
+    left: 5px;
+    border-bottom: $border-dotted;
+    border-left: $border-dotted;
+  }
+  &.bottom-left {
+    bottom: 0;
+    right: 5px;
+    border-bottom: $border-solid;
+    border-right: $border-solid;
+  }
+}
+
+.thumbnail-container {
+  @include hover {
+    .thumbnail-overlay {
+      &.top-left,
+      &.bottom-right {
+        opacity: 1;
+        width: 35%;
+        height: 35%;
+      }
+      &.top-right,
+      &.bottom-left {
+        opacity: 1;
+        width: 25%;
+        height: 25%;
+      }
+    }
+  }
+}

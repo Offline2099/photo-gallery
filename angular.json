@@ -7,6 +7,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+          "type": "component",
           "style": "scss",
           "skipTests": true
         },
@@ -14,6 +15,7 @@
           "skipTests": true
         },
         "@schematics/angular:directive": {
+          "type": "directive",
           "skipTests": true
         },
         "@schematics/angular:guard": {
@@ -29,6 +31,7 @@
           "skipTests": true
         },
         "@schematics/angular:service": {
+          "type": "service",
           "skipTests": true
         }
       },
@@ -89,7 +92,10 @@
               "buildTarget": "photo-gallery:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "hmr": false
+          }
         },
         "extract-i18n": {
           "builder": "@angular/build:extract-i18n"

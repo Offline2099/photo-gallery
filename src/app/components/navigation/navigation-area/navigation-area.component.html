@@ -1,0 +1,46 @@
+<!-- Tab Headers -->
+<div class="tab-headers">
+  @if (width !== ScreenWidth.mobile && width !== ScreenWidth.tablet) {
+    <div class="label">Sort by: </div>
+  }
+  @for (tab of tabs; track tab.id) {
+    <app-control-button
+      class="navigation-tab-header"
+      [text]="width === ScreenWidth.mobile ? tab.name.short : tab.name.full"
+      [isSelected]="tab === selectedTab"
+      (click)="selectTab(tab)"
+    />
+  }
+</div>
+
+<!-- Selected Tab -->
+<div class="tab-body">
+  @if (
+    width !== ScreenWidth.mobile &&
+    (width === ScreenWidth.tablet || selectedTab.isTwoColumnLayout)
+  ) {
+    <!-- Two Column Layout -->
+    @for (column of [].constructor(2); let $column = $index; track $index) {
+      <div class="column">
+        @for (group of selectedTab.galleryGroups(); track group.name) {
+          @if (!$column && $even || $column && $odd) {
+            <app-control-button-group
+              [group]="group"
+              [(isCollapsed)]="isCollapsed()[selectedTab.id][group.name]"
+              [countImages]="selectedTab.countImages"
+            />
+          }
+        }
+      </div>
+    }
+  } @else {
+    <!-- One Column Layout -->
+    @for (group of selectedTab.galleryGroups(); track group.name) {
+      <app-control-button-group
+        [group]="group"
+        [(isCollapsed)]="isCollapsed()[selectedTab.id][group.name]"
+        [countImages]="selectedTab.countImages"
+      />
+    }
+  }
+</div>

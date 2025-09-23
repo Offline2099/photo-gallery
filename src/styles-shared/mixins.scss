@@ -1,0 +1,85 @@
+@use 'sass:color';
+
+@mixin hover {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+//=============================================================================
+//  Shapes
+//=============================================================================
+
+@mixin square($size) {
+  width: $size;
+  height: $size;
+}
+
+@mixin circle($diameter) {
+  @include square($diameter);
+  border-radius: 50%;
+}
+
+//=============================================================================
+//  Overlay
+//=============================================================================
+
+@mixin overlay($top: 0, $left: 0, $width: 100%, $height: 100%) {
+  position: absolute;
+  top: $top;
+  left: $left;
+  width: $width;
+  height: $height;
+}
+
+@mixin pseudo-element-overlay($content: '', $top: 0, $left: 0, $width: 100%, $height: 100%) {
+  @include overlay($top, $left, $width, $height);
+  content: $content;
+}
+
+//=============================================================================
+//  Backgrounds
+//=============================================================================
+
+@mixin bg-smooth-gradient($color, $blur) {
+  &:before {
+    @include pseudo-element-overlay(
+      $top: -$blur,
+      $left: -$blur,
+      $width: calc(100% + 2 * $blur),
+      $height: calc(100% + 2 * $blur)
+    );
+    z-index: -1;
+    background: linear-gradient(
+      90deg, 
+      color.adjust($color, $alpha: -0.8) 0%,
+      color.adjust($color, $alpha: -0.25) 20%,
+      color.adjust($color, $alpha: -0.25) 80%,
+      color.adjust($color, $alpha: -0.8) 100%
+    );
+    filter: blur($blur);
+  }
+}
+
+@mixin bg-cells($bg-color, $line-color, $cell-width, $cell-height, $shift: 1) {
+  background-color: $bg-color;
+  background-image: 
+    linear-gradient($line-color 1.1px, transparent 1.1px), 
+    linear-gradient(to right, $line-color 1.1px, $bg-color 1.1px);
+  background-size: $cell-width $cell-height;
+  @if ($shift == 1) {
+    background-position: calc(0px - $cell-width / 2) calc(0px - $cell-height / 2);
+  }
+}
+
+@mixin bg-lines($bg-color, $line-color, $line-gap) {
+  background-color: $bg-color;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      $line-color 0, $line-color 1px,
+      $bg-color 2px, $bg-color $line-gap
+    );
+}

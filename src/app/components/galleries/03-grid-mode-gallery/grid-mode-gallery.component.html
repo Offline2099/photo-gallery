@@ -1,0 +1,24 @@
+<!-- Gallery Name & Options Panel -->
+<app-gallery-panel [gallery]="gallery()" [isDefaultMode]="false" />
+
+<!-- Image Blocks -->
+@for (image of gallery().images; track $index) {
+  <div class="gallery-block">
+
+    <!-- Image -->
+    <img 
+      class="gallery-image"
+      [ngClass]="{'unclickable': !isClickAllowed}"
+      src="./img/{{(!isDesktop || imagesInRow > 2) ? 'small/' : ''}}{{image.path}}"
+      alt="Image {{image.index}}"
+      (click)="toggleOverlay(image)"
+      (contextmenu)="$event.preventDefault()"
+    />
+
+    <!-- Caption and Data -->
+    @if (isAnyDataVisible) {
+      <app-image-data [data]="image" [galleryType]="gallery().type" />
+    }
+
+  </div>
+}

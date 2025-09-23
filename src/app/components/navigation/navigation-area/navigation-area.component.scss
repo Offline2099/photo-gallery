@@ -1,0 +1,70 @@
+@use '../../../../styles-shared' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+  box-shadow: 0 0 5px 5px $bg-area inset;
+  @include bg-cells($bg-area, #2b2b2b, 3.125%, 22px);
+  @include tablet {
+    background: $bg-area;
+    box-shadow: none;
+  }
+}
+
+//=============================================================================
+//  Tab Headers (Menu)
+//=============================================================================
+
+.tab-headers {
+  padding-left: calc(20% - 5px);
+  @include desktop-small {
+    padding: 0 5px;
+    text-align: center;
+  }
+  @include tablet {
+    display: flex;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 5px;
+  }
+  @include mobile {
+    padding: 0 2px;
+  }
+}
+
+.label {
+  display: inline-block;
+  padding: 5px 10px 5px 0;
+  color: $text-accent-dim;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px $shadow-bright;
+}
+
+//=============================================================================
+//  Tab Body (Selected Tab)
+//=============================================================================
+
+.tab-body {
+  padding: 5px 0;
+  app-control-button-group {
+    animation: fade-in .5s;
+  }
+  @include tablet {
+    padding: 0;
+  }
+}
+
+.column {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  padding: 0 5px;  
+  & > * {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

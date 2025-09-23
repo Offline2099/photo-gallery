@@ -1,0 +1,214 @@
+@use '../../../../styles-shared' as *;
+
+:host {
+  display: inline-flex;
+  margin: 4px;
+  padding: 2px 10px 4px 10px;
+  background: $bg-element;
+  border-radius: 3px;
+  transition: .2s;
+  cursor: pointer;
+  &.selected {
+    pointer-events: none;
+    box-shadow: 0 0 2px 2px $shadow-bright inset;
+    @include bg-lines($bg-element, $bg-accent, 8px)
+  }
+  @include hover {
+    background: $bg-accent;
+    box-shadow: none;
+  }
+  @include tablet {
+    margin: 3px;
+    padding: 1px 8px 2px 8px;
+  }
+}
+
+:host.navigation-tab-header {
+  margin: 0 10px 0 0;
+  padding: 5px 20px;
+  color: $text-normal;
+  @include tablet {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    padding: 5px;
+    border-bottom: 2px solid $border-dark;
+    border-radius: 0;
+    font-size: 16px;
+    &.selected {
+      border-color: $border-accent;
+    }
+  }
+}
+
+:host.no-margin {
+  margin: 0;
+}
+
+:host.control-button-right {
+  float: right;
+}
+
+:host.button-content-right {
+  justify-content: right;
+}
+
+:host.image-change-button {
+  min-width: 70px;
+  padding-left: 8px;
+  padding-right: 8px;
+  @include desktop-small {
+    min-width: 65px;
+  }
+}
+
+//=============================================================================
+//  Switch
+//=============================================================================
+
+.switch {
+  display: flex;
+  align-items: center;
+  width: 32px;
+  margin: 2px 10px 0 0;
+  border: 2px solid $border-bright;
+  border-radius: 8px;
+  background: $bg-element;
+  text-align: left;
+  transition: .3s;
+  .ball {
+    @include circle(14px);
+    position: relative;
+    left: 0;
+    border: 2px solid $border-dark;
+    background: $text-dim;
+    transition: .3s;
+  }
+  &.on {
+    border-color: $border-accent-light;
+    background: $bg-accent;
+    .ball {
+      left: 14px;
+      border-color: $border-accent;
+      background: $bg-accent-light;
+    }
+  }
+  &.off {
+    background: $bg-element;
+  }
+  @include desktop-small {
+    width: 26px;
+    .ball {
+      @include circle(12px);
+    }
+    &.on .ball {
+      left: 10px;
+    }
+  }
+  @include tablet {
+    width: 24px;
+    height: 14px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    border-width: 1px;
+  }
+}
+
+//=============================================================================
+//  Icons
+//=============================================================================
+
+.icon {
+  @include square(20px);
+  margin-right: 10px;
+  opacity: .7;
+  @include desktop-small {
+    @include square(18px);
+  }
+}
+
+:host.no-text .icon {
+  margin-right: 0;
+}
+
+//=============================================================================
+//  Texts and Label
+//=============================================================================
+
+.text {
+  color: $text-normal;
+  font-size: 18px;
+  line-height: 20px;
+  letter-spacing: 0.015em;
+  text-shadow: 1px 1px $shadow-bright;
+  transition: .2s;
+  @include desktop-small {
+    font-size: 16px;
+    line-height: 18px;
+  }
+  @include tablet {
+    font-size: 14px;
+  }
+}
+
+:host.selected .text {
+  color: $text-accent;
+}
+
+:host.navigation-tab-header .text {
+  font-size: 20px;
+  @include tablet {
+    font-size: 16px;
+  }
+}
+
+:host {
+  @include hover {
+    .text {
+      color: $text-bright;
+    }
+  }
+}
+
+.text-before,
+.text-after,
+.label {
+  margin-top: 2px;
+  color: $text-dim;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.015em;
+  text-shadow: 1px 1px $shadow-bright;
+  @include desktop-small {
+    font-size: 14px;
+    line-height: 16px;
+  }
+  @include tablet {
+    font-size: 12px;
+  }
+}
+
+.text-before {
+  margin-right: .5em;
+}
+
+.text-after {
+  margin-left: .5em;
+}
+
+.label {
+  margin-left: .6em;
+  @include desktop-small {
+    margin-top: 1px;
+  }
+  @include tablet {
+    margin-top: 2px;
+  }
+}
+
+:host.accent-text {
+  .text-before,
+  .text-after {
+    color: $text-accent;
+  }
+}

@@ -1,0 +1,99 @@
+@use '../../../../styles-shared' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  &:not(.overlay-mode) {
+    flex-basis: 70%;
+    align-self: flex-start;
+    position: sticky;
+    top: 0;
+    padding: 0 5px;
+    animation: fade-in .5s;
+  }
+  &.overlay-mode {
+    width: calc(16 * (100vh - 178px) / 9);
+    min-width: calc(992px - 20px);
+    background: $bg-page;
+    border: 5px solid $bg-page;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 5px $shadow-bright;
+    &.no-data {
+      border-bottom: none;
+      width: calc(16 * (100vh - 63px) / 9);
+    }
+  }
+}
+
+//=============================================================================
+//  Panel Elements
+//=============================================================================
+
+.image-panel {
+  display: flex;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  margin-top: -5px;
+  padding: 2px 5px;
+  background: $bg-area;
+  border-top: 5px solid $bg-page;
+  border-bottom: 5px solid $bg-page;
+}
+
+.button-wrapper {
+  display: flex;
+  margin-left: auto;
+  & > * {
+    display: inline-flex;
+    margin: 4px 3px;
+  }
+}
+
+.image-name {
+  margin: 0 auto;
+  padding: 0 5px;
+  color: $text-accent-dim;
+  font-size: 20px;
+  line-height: 34px;
+  letter-spacing: 0.025em;
+  @include desktop-small {
+    font-size: 18px;
+    line-height: 30px;
+  }
+}
+
+//=============================================================================
+//  Image Block
+//=============================================================================
+
+.image-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16/9;
+  margin-bottom: 5px;
+  box-shadow: 0 0 2px 2px $bg-accent inset;
+  @include bg-cells($bg-page, $bg-accent, 4%, 4%);
+}
+
+.cogwheel {
+  display: block;
+  animation: rotate 3s infinite;
+}
+
+.image-selected {
+  @include overlay;;
+  z-index: 10;
+  opacity: 1;
+  transition: .2s;
+  transition-delay: .2s;
+  cursor: zoom-in;
+  &.overlay {
+    cursor: zoom-out;
+  }
+  &.image-loading {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,51 @@
+@use 'sass:color';
+@use '../../../../styles-shared' as *;
+
+:host {
+  height: 100%;
+}
+
+//=============================================================================
+//  Empty Gallery Placeholder
+//=============================================================================
+
+$placeholder-margin: 10px;
+$grid-color: color.adjust($bg-accent, $alpha: -0.65);
+
+.placeholder {
+  height: calc(100% - 2 * $placeholder-margin);
+  margin: $placeholder-margin 15px;
+  box-shadow: 0 0 5px 5px $bg-page inset;
+  @include bg-cells($bg-page, $grid-color, 4%, 4%, 0);
+  @include mobile {
+    @include bg-cells($bg-page, $grid-color, 10%, 4%, 0);
+  }
+  &-text {
+    padding-top: 50px;
+    color: $text-accent-dim;
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 0.02em;
+    @include tablet {
+      padding-top: 65px;
+      font-size: 26px;
+    }
+  }
+}
+
+//=============================================================================
+//  Overlay
+//=============================================================================
+
+.overlay {
+  @include overlay;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 2000;
+  padding: 10px;
+  box-shadow: 0 0 5px 5px $bg-element inset;
+  animation: fade-in .2s;
+  @include bg-lines($bg-element, $bg-accent, 15px);
+}

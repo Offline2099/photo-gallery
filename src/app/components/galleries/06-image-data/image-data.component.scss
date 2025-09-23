@@ -1,0 +1,171 @@
+@use 'sass:color';
+@use '../../../../styles-shared' as *;
+
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 66px;
+  animation: fade-in .5s;
+  @include bg-cells($bg-area, $bg-element, 3.125%, 22px);
+  @include tablet {
+    min-height: 60px;
+    @include bg-cells($bg-area, $bg-element, 3.125%, 20px);
+  }
+  @include mobile {
+    min-height: 48px;
+    @include bg-cells($bg-area, $bg-element, 6.25%, 18px);
+  }
+  &.has-tabs {
+    flex-wrap: wrap;
+    height: 110px;
+  }
+}
+
+//=============================================================================
+//  Decorative Corners
+//=============================================================================
+
+$decorative-border: 2px solid $bg-accent;
+
+.top-left-corner,
+.bottom-right-corner {
+  position: absolute;
+  width: 20%;
+  height: 50%;
+  pointer-events: none;
+}
+
+.top-left-corner {
+  top: 0;
+  left: 0;
+  border-top: $decorative-border;
+  border-left: $decorative-border;
+}
+
+.bottom-right-corner {
+  bottom: 0;
+  right: 0;
+  border-bottom: $decorative-border;
+  border-right: $decorative-border;
+}
+
+:host.has-tabs .top-left-corner, 
+:host.has-tabs .bottom-right-corner {
+  border-width: 3px;
+}
+
+//=============================================================================
+//  Tab Layout Elements
+//=============================================================================
+
+.image-data-column {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height: 110px;
+}
+
+.image-data-section.data-section-tab {
+  flex: 1;
+  padding-top: 0;
+}
+
+.image-data-controls {
+  padding: 0 5px 1px 5px;
+  text-transform: capitalize;
+  @include desktop-small {
+    padding: 1px 5px 3px 5px;
+  }
+}
+
+//=============================================================================
+//  Data Section
+//=============================================================================
+
+.image-data-section {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px 10px 15px;
+  color: $text-normal;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px $shadow-dark;
+  user-select: text;
+  animation: fade-in .5s;
+  cursor: default;
+  @include desktop-small {
+    font-size: 16px;
+  }
+  @include tablet {
+    padding-bottom: 8px;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  @include mobile {
+    padding: 11px 15px 7px 15px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
+
+//=============================================================================
+//  Icons
+//=============================================================================
+
+.icon {
+  height: 22px;
+  margin-right: 15px;
+  padding: 2px;
+  outline: 2px solid $border-accent;
+  border-radius: 3px;
+  background: color.adjust($bg-accent, $alpha: -0.6);
+  line-height: 18px;
+  user-select: none;
+  img {
+    @include square(18px);
+  }
+  @include tablet {
+    height: 20px;
+    transform: translateY(-1px);
+    img {
+      @include square(16px);
+    }
+  }
+  @include mobile {
+    height: 18px;
+    margin-right: 12px;
+    img {
+      @include square(14px);
+    }
+  }
+}
+
+//=============================================================================
+//  Data Elements
+//=============================================================================
+
+.section-element {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 0 5px;
+  border-radius: 2px;
+  background: color.adjust($bg-element, $alpha: -0.3);
+  line-height: 19px;
+  &.coordinates {
+    font-size: smaller;
+  }
+  .marker {
+    user-select: none;
+  }
+  .tag {
+    text-transform: capitalize;
+  }
+  @include tablet {
+    line-height: 18px;
+  }
+  @include mobile {
+    line-height: 16px;
+  }
+}

@@ -1,0 +1,48 @@
+@use '../../../styles-shared' as *;
+
+:host {
+  display: flex;
+  height: 100%;
+  position: relative;
+  margin: 0 5px;
+  min-height: 50vh;
+  animation: fade-in .5s;
+  &:before {
+    @include pseudo-element-overlay;
+    z-index: -1;
+    background: url('../../../../public/img/small/2022/07/4.webp');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(.8) contrast(90%) blur(5px);
+  }
+}
+
+.overlay-text {
+  margin: 5% 0 5% 20%;
+  padding: 20px;
+  color: $text-light;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 0.01em;
+  word-spacing: .08em;
+  text-shadow: 2px 2px 2px $shadow-dark;
+  p {
+    margin-bottom: 1.4em;
+  }
+  @include desktop-small {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+  @include tablet {
+    padding: 25px;
+    font-size: 20px;
+  }
+  @include mobile {
+    font-size: 16px;
+    br {
+      display: none;
+    }
+  }
+}

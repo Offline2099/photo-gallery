@@ -1,0 +1,57 @@
+@use '../../../../styles-shared' as *;
+
+:host {
+  display: grid;
+  grid-auto-rows: auto;
+  gap: 10px;
+  padding: 0 5px;
+  animation: fade-in .5s;
+  app-gallery-panel {
+    grid-column: 1 / -1;
+  }
+  @include tablet {
+    gap: 8px;
+  }
+}
+
+@for $n from 1 through 4 {
+  :host.grid-#{$n} {
+    grid-template-columns: repeat($n, 1fr);
+    @include tablet {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+//=============================================================================
+//  Image Blocks
+//=============================================================================
+
+.gallery-block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  @include hover {
+    .gallery-image {
+      filter: brightness(1.1);
+    }
+  }
+}
+
+.gallery-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  color: $text-accent;
+  text-align: center;
+  transition: .2s;
+  @include bg-cells($bg-area, $bg-accent, 3.125%, 5.5%);
+  cursor: zoom-in;
+  &.unclickable {
+    pointer-events: none;
+    cursor: default;
+  }
+  @include tablet {
+    @include bg-cells($bg-area, $bg-accent, 6.25%, 10%);
+  }
+}
