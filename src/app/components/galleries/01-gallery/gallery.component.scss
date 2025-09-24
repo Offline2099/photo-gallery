@@ -13,6 +13,7 @@ $placeholder-margin: 10px;
 $grid-color: color.adjust($bg-accent, $alpha: -0.65);
 
 .placeholder {
+  animation: fade-in .5s .5s both;
   height: calc(100% - 2 * $placeholder-margin);
   margin: $placeholder-margin 15px;
   box-shadow: 0 0 5px 5px $bg-page inset;

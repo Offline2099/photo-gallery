@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, Route, NavigationEnd } from '@angular/router';
-import { Observable, Subscription, combineLatest, filter, map } from 'rxjs';
+import { Observable, Subscription, combineLatest, filter, map, timer } from 'rxjs';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
@@ -40,10 +40,15 @@ export class GalleryComponent {
     private settings: SettingsService
   ) {
     this.subscription = this.constructGalleryData().subscribe(data => {
-      if (!this.selectedImage || data?.gallery !== this.galleryData?.gallery) 
-        this.selectedImage = data?.gallery.images.length ? data.gallery.images[0] : null;
-      if (data?.isDesktop) this.preloadImages(data.gallery);
-      this.galleryData = data;
+      if (data?.gallery !== this.galleryData?.gallery) {
+        this.selectedImage = null;
+      }
+      timer(0).subscribe(() => {
+        if (!this.selectedImage || data?.gallery !== this.galleryData?.gallery) 
+          this.selectedImage = data?.gallery.images.length ? data.gallery.images[0] : null;
+        if (data?.isDesktop) this.preloadImages(data.gallery);
+        this.galleryData = data;
+      });
     });
   }
 
