@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { Subscription, combineLatest } from 'rxjs';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
+import { GalleryType } from '../../../constants/gallery-type.enum';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
@@ -10,7 +11,6 @@ import { ImageData } from '../../../types/galleries/image-data.interface';
 import { ControlButtonComponent } from '../../ui-elements/control-button/control-button.component';
 import { ImageDataComponent } from '../06-image-data/image-data.component';
 // Services
-import { DataService } from '../../../services/data.service';
 import { LayoutService } from '../../../services/layout.service';
 import { SettingsService } from '../../../services/settings.service';
 import { UtilityService } from '../../../services/utility.service';
@@ -46,7 +46,6 @@ export class SelectedImageComponent {
   showInfo!: boolean;
 
   constructor(
-    private data: DataService,
     private layout: LayoutService,
     private settings: SettingsService,
     private utility: UtilityService
@@ -65,7 +64,7 @@ export class SelectedImageComponent {
   }
 
   imageIndexInGallery(gallery: Gallery, image: ImageData): number {
-    if (this.data.isChronological(gallery)) return image.index;
+    if (gallery.type === GalleryType.month) return image.index;
     return gallery.images.findIndex(img => img.path === image.path) + 1;
   }
 
