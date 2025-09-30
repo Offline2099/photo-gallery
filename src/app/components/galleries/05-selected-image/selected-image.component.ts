@@ -1,4 +1,4 @@
-import { Component, HostBinding, input, model, computed } from '@angular/core';
+import { Component, HostBinding, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Subscription, combineLatest } from 'rxjs';
 // Constants & Enums
@@ -50,6 +50,9 @@ export class SelectedImageComponent {
     private settings: SettingsService,
     private utility: UtilityService
   ) {
+    effect(() => {
+      if (this.image()) this.isLoading = true;
+    });
     this.subscription = combineLatest([
       this.layout.screenWidth$,
       this.settings.showImageInfo$
@@ -81,12 +84,10 @@ export class SelectedImageComponent {
   }
 
   selectPreviousImage(): void {
-    this.isLoading = true;
     this.image.set(this.gallery().images[this.previousIndex() - 1]);
   }
 
   selectNextImage(): void {
-    this.isLoading = true;
     this.image.set(this.gallery().images[this.nextIndex() - 1]);
   }
 
