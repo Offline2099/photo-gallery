@@ -10,7 +10,7 @@
       class="gallery-image"
       [ngClass]="{'unclickable': !isClickAllowed}"
       src="./img/{{(!isDesktop || imagesInRow > 2) ? 'small/' : ''}}{{image.path}}"
-      alt="Image {{image.index}}"
+      alt="{{gallery().name.full}} - Image {{$index}}"
       (click)="toggleOverlay(image)"
       (contextmenu)="$event.preventDefault()"
     />
