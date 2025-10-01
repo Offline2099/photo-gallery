@@ -34,11 +34,7 @@ export class SelectedImageComponent {
   imageName = computed<string>(() => this.constructImageName(this.gallery(), this.imageIndex()));
   previousIndex = computed<number>(() => this.getPreviousIndex(this.gallery(), this.imageIndex()));
   nextIndex = computed<number>(() => this.getNextIndex(this.gallery(), this.imageIndex()));
-
-  downloadedImageName = computed<string>(() => 
-    `${this.utility.toDashCase(this.gallery().name.full)}-image-${this.image().index}.jpg`
-  );
-
+  
   isLoading: boolean = true;
 
   subscription: Subscription;

@@ -17,7 +17,7 @@
 
     <!-- Caption and Data -->
     @if (isAnyDataVisible) {
-      <app-image-data [data]="image" [galleryType]="gallery().type" />
+      <app-image-data [gallery]="gallery()" [data]="image" />
     }
 
   </div>

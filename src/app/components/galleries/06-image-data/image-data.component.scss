@@ -169,3 +169,11 @@ $decorative-border: 2px solid $bg-accent;
     line-height: 16px;
   }
 }
+
+a {
+  transition: .2s;
+  cursor: pointer;
+  @include hover {
+    color: $text-accent;
+  }
+}

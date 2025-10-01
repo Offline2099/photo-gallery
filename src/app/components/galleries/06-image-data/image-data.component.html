@@ -29,13 +29,13 @@
       @if (tab.id === dataTabs()[selectedTabIndex].id) {
         <div class="image-data-section data-section-tab">
           @if (tab.id === ImageDataTabId.location) {
-            <ng-template [ngTemplateOutlet]="locationData" [ngTemplateOutletContext]="{location: data().location}" />
+            <ng-template [ngTemplateOutlet]="locationData" [ngTemplateOutletContext]="{location: location()}" />
           }
           @if (tab.id === ImageDataTabId.time) {
-            <ng-template [ngTemplateOutlet]="timeData" [ngTemplateOutletContext]="{time: time()}" />
+            <ng-template [ngTemplateOutlet]="timeData" [ngTemplateOutletContext]="{data: time()}" />
           }
           @if (tab.id === ImageDataTabId.tags) {
-            <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: data().tags}" />
+            <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: tags()}" />
           }
         </div>
       }
@@ -56,16 +56,16 @@
   @if (dataSettings.showImageData) {
 
     <!-- Location -->
-    @if (data().location; as location) {
+    @if (location(); as location) {
       <div class="image-data-section">
         <ng-template [ngTemplateOutlet]="locationData" [ngTemplateOutletContext]="{location}" />
       </div>
     }
 
     <!-- Time -->
-    @if (galleryType() !== GalleryType.month) {
+    @if (gallery().type !== GalleryType.month) {
       <div class="image-data-section">
-        <ng-template [ngTemplateOutlet]="timeData" [ngTemplateOutletContext]="{time: time()}" />
+        <ng-template [ngTemplateOutlet]="timeData" [ngTemplateOutletContext]="{data: time()}" />
       </div>
     }
   }
@@ -73,7 +73,7 @@
   <!-- Tags -->
   @if (data().tags?.length && dataSettings.showImageTags) {
     <div class="image-data-section">
-      <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: data().tags}" />
+      <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: tags()}" />
     </div>
   }
 
@@ -85,23 +85,37 @@
     <img src="./ui/location-icon.webp" alt="" />
   </div>
   <div>
-    <span class="section-element">{{location.name}}</span>
-    @if (location.areaName) {
-      <span class="section-element">{{location.areaName}}</span>
+    <span class="section-element">
+      @if (gallery().type === GalleryType.location && gallery().name.short === location.name) {
+        {{location.name}}
+      } @else {
+        <a [routerLink]="location.nameURL">{{location.name}}</a>
+      }
+    </span>
+    @if (location.area) {
+      <span class="section-element">
+        @if (gallery().type === GalleryType.location && gallery().name.short === location.area) {
+          {{location.area}}
+        } @else {
+          <a [routerLink]="location.areaURL">{{location.area}}</a>
+        }
+      </span>
     }
-    @if (location.coords) {
-      <span class="section-element coordinates">{{coordinates()}}</span>
+    @if (location.coordinates) {
+      <span class="section-element coordinates">{{location.coordinates}}</span>
     }        
   </div>
 </ng-template>
 
 <!-- Time Template -->
-<ng-template #timeData let-time="time">
+<ng-template #timeData let-data="data">
   <div class="icon">
     <img src="./ui/calendar-icon.webp" alt="" />
   </div>
   <div>
-    <span class="section-element">{{time}}</span>
+    <span class="section-element">
+      <a [routerLink]="data.timeURL">{{data.time}}</a>
+    </span>
   </div>
 </ng-template>
 
@@ -111,10 +125,15 @@
     <img src="./ui/tag-icon.webp" alt="" />
   </div>
   <div>
-    @for (tag of tags; track $index) {
+    @for (data of tags; track $index) {
       <span class="section-element">
         <span class="marker">&bull; </span>
-        <span class="tag">{{tag}}</span>
+        @if (gallery().type === GalleryType.tag && (gallery().name.short | lowercase) === data.tag) {
+          <span class="tag">{{data.tag}}</span>
+        } @else {
+          <a class="tag" [routerLink]="data.tagURL">{{data.tag}}</a>
+        }
+        
       </span>
     }
   </div>

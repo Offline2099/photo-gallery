@@ -12,6 +12,7 @@ import { DefaultGalleries } from '../types/galleries/default-galleries.interface
 import { ImageData } from '../types/galleries/image-data.interface';
 // Services
 import { UtilityService } from './utility.service';
+import { RouteService } from './route.service';
 
 const DATA_URL: string = 'data/image-data.json';
 
@@ -23,7 +24,7 @@ export class DataService {
   private galleries: DefaultGalleries | null = null;
   private areGalleriesConstructed: boolean = false;
 
-  constructor(private http: HttpClient, private utility: UtilityService) {}
+  constructor(private http: HttpClient, private utility: UtilityService, private route: RouteService) {}
 
   getGalleries(): Observable<DefaultGalleries> {
     if (this.areGalleriesConstructed) return of(this.galleries as DefaultGalleries);
@@ -65,7 +66,7 @@ export class DataService {
 
   private prepareImageData(image: ImageData): void {
     image.index = Number(image.index);
-    image.path = `${image.year}/${this.utility.addLeadingZeroes(image.month)}/${image.index}.webp`;
+    image.path = this.route.imageRoute(image.year, image.month, image.index);
   }
 
   private createGalleriesByYear(data: Record<number, ImageData[]>): Gallery[] {
@@ -92,7 +93,7 @@ export class DataService {
             short: monthName,
             full: `${monthName} ${year}`
           },
-          path: `${year}/${this.utility.addLeadingZeroes(Number(month))}`,
+          path: this.route.monthRoute(year, month),
           images
         }   
       })
@@ -109,7 +110,7 @@ export class DataService {
           short: location,
           full: `Location: ${location}`
         },
-        path: `places/${this.utility.toDashCase(location)}`,
+        path: this.route.locationRoute(location),
         images: this.sortImagesByTime(data[location])
       }))
     }));
@@ -121,12 +122,12 @@ export class DataService {
       galleries: group.tags.map(tag => {
         const capitalizedTag: string = this.utility.capitalizeFirstLetter(tag);
         return {
-          type: GalleryType.location,
+          type: GalleryType.tag,
           name: {
             short: capitalizedTag,
             full: `Tag: ${capitalizedTag}`
           },
-          path: `tags/${this.utility.toDashCase(tag)}`,
+          path: this.route.tagRoute(tag),
           images: this.sortImagesByTime(data[tag])
         }
       })

@@ -40,14 +40,17 @@ export class GalleryComponent {
     private settings: SettingsService
   ) {
     this.subscription = this.constructGalleryData().subscribe(data => {
-      if (data?.gallery !== this.galleryData?.gallery) {
-        this.selectedImage = null;
-      }
+      const isNewGallery: boolean = data?.gallery !== this.galleryData?.gallery;
+      if (isNewGallery) this.selectedImage = null;
       timer(0).subscribe(() => {
-        if (!this.selectedImage || data?.gallery !== this.galleryData?.gallery) 
-          this.selectedImage = data?.gallery.images.length ? data.gallery.images[0] : null;
-        if (data?.isDesktop) this.preloadImages(data.gallery);
         this.galleryData = data;
+        if (!isNewGallery) return;
+        this.selectedImage = data?.gallery.images.length ? data.gallery.images[0] : null;
+        if (this.galleryData?.isOverlayVisible) {
+          this.galleryData.isOverlayVisible = false;
+          this.toggleOverlay();
+        }
+        if (data?.isDesktop) this.preloadImages(data.gallery);
       });
     });
   }
@@ -91,12 +94,13 @@ export class GalleryComponent {
       img.src = `./img/${gallery.images[index].path}`;
       if (index === gallery.images.length - 1) return;
       img.onload = () => { preload(index + 1) }
+      img.onerror = () => { preload(index + 1) }
     }
     preload(0);
   }
 
   toggleOverlay(): void {
-    this.settings.toggleOverlay()
+    this.settings.toggleOverlay();
   }
 
   ngOnDestroy(): void {
