@@ -1,6 +1,5 @@
-import { Component, HostBinding, input, model, computed } from '@angular/core';
+import { Component, HostBinding, Signal, input, model, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { GalleryGroup } from '../../../types/galleries/gallery-group.interface';
 import { ControlButtonComponent } from '../../ui-elements/control-button/control-button.component';
 import { LayoutService } from '../../../services/layout.service';
@@ -14,7 +13,7 @@ import { LayoutService } from '../../../services/layout.service';
 export class ControlButtonGroupComponent {
 
   @HostBinding('class.collapsed') get _isCollapsed(): boolean {
-    return this.isCollapsed() && !this.isDesktop;
+    return this.isCollapsed() && !this.isDesktop();
   }
 
   group = input.required<GalleryGroup>();
@@ -23,13 +22,10 @@ export class ControlButtonGroupComponent {
 
   label = computed<string>(() => this.constructLabel(this.group(), this.countImages()))
 
-  widthSubscription: Subscription;
-  isDesktop!: boolean;
+  isDesktop: Signal<boolean>;
 
   constructor(private layout: LayoutService) {
-    this.widthSubscription = this.layout.isDesktop$.subscribe(isDesktop => 
-      this.isDesktop = isDesktop
-    );
+    this.isDesktop = this.layout.isDesktop;
   }
 
   constructLabel(group: GalleryGroup, countImages: boolean): string {
@@ -39,12 +35,8 @@ export class ControlButtonGroupComponent {
   }
 
   toggleGroup(): void {
-    if (this.isDesktop) return;
+    if (this.isDesktop()) return;
     this.isCollapsed.update(value => !value);
-  }
-
-  ngOnDestroy(): void {
-    if (this.widthSubscription) this.widthSubscription.unsubscribe();
   }
 
 }

@@ -8,15 +8,15 @@
     <!-- Image -->
     <img 
       class="gallery-image"
-      [ngClass]="{'unclickable': !isClickAllowed}"
-      src="./img/{{(!isDesktop || imagesInRow > 2) ? 'small/' : ''}}{{image.path}}"
+      [ngClass]="{'unclickable': !isClickAllowed()}"
+      src="./img/{{isSmallImage() ? 'small/' : ''}}{{image.path}}"
       alt="{{gallery().name.full}} - Image {{$index}}"
       (click)="toggleOverlay(image)"
       (contextmenu)="$event.preventDefault()"
     />
 
     <!-- Caption and Data -->
-    @if (isAnyDataVisible) {
+    @if (isAnyDataVisible()) {
       <app-image-data [gallery]="gallery()" [data]="image" />
     }
 

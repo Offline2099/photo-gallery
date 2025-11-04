@@ -1,12 +1,12 @@
 <!-- Tab Headers -->
 <div class="tab-headers">
-  @if (width !== ScreenWidth.mobile && width !== ScreenWidth.tablet) {
+  @if (width() !== ScreenWidth.mobile && width() !== ScreenWidth.tablet) {
     <div class="label">Sort by: </div>
   }
   @for (tab of tabs; track tab.id) {
     <app-control-button
       class="navigation-tab-header"
-      [text]="width === ScreenWidth.mobile ? tab.name.short : tab.name.full"
+      [text]="width() === ScreenWidth.mobile ? tab.name.short : tab.name.full"
       [isSelected]="tab === selectedTab"
       (click)="selectTab(tab)"
     />
@@ -16,8 +16,8 @@
 <!-- Selected Tab -->
 <div class="tab-body">
   @if (
-    width !== ScreenWidth.mobile &&
-    (width === ScreenWidth.tablet || selectedTab.isTwoColumnLayout)
+    width() !== ScreenWidth.mobile &&
+    (width() === ScreenWidth.tablet || selectedTab.isTwoColumnLayout)
   ) {
     <!-- Two Column Layout -->
     @for (column of [].constructor(2); let $column = $index; track $index) {

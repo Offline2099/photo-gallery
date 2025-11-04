@@ -11,7 +11,7 @@
 
   <!-- Name -->
   <div class="image-name">
-    @if (isOverlay() && !isDesktopSmall) {
+    @if (isOverlay() && !isDesktopSmall()) {
       <span>{{gallery().name.full}} &#9656; </span>
     }
     <span>Image {{imageIndex()}}</span>
@@ -25,7 +25,7 @@
         class="no-margin"
         icon="new-tab-icon.webp"
         text="Full Size"
-        [label]="isDesktopSmall ? '' : '3840&hairsp;x&hairsp;2160'"
+        [label]="isDesktopSmall() ? '' : '3840&hairsp;x&hairsp;2160'"
       />
     </a>
 
@@ -68,6 +68,6 @@
 </div>
 
 <!-- Image Data -->
-@if (showInfo) {
+@if (showImageInfo()) {
   <app-image-data [gallery]="gallery()" [data]="image()" [hasTabs]="true" />
 }

@@ -1,6 +1,6 @@
 <!-- Group Header -->
 <div class="group-header" (click)="toggleGroup()">
-  @if (!isDesktop) {
+  @if (!isDesktop()) {
     <span class="triangle">&#9654;</span>
     <span>{{group().name}}</span>
     <span class="label">{{label()}}</span>

@@ -1,63 +1,62 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsService {
 
-  isDefaultModeByTime$ = new BehaviorSubject<boolean>(true);
-  isDefaultModeByData$ = new BehaviorSubject<boolean>(false);
+  isDefaultModeByTime = signal<boolean>(true);
+  isDefaultModeByData = signal<boolean>(false);
 
-  isPanelVisible$ = new BehaviorSubject<boolean>(false);
-  isOverlayVisible$ = new BehaviorSubject<boolean>(false);
+  isPanelVisible = signal<boolean>(false);
+  isOverlayVisible = signal<boolean>(false);
 
-  isMouseoverSelectAllowed$ = new BehaviorSubject<boolean>(false);
-  showImageInfo$ = new BehaviorSubject<boolean>(true);
-    
-  imagesInRow$ = new BehaviorSubject<number>(3);
-  showImageCaptions$ = new BehaviorSubject<boolean>(true);
-  showImageData$ = new BehaviorSubject<boolean>(false);
-  showImageTags$ = new BehaviorSubject<boolean>(false);
+  isMouseoverSelectAllowed = signal<boolean>(false);
+  showImageInfo = signal<boolean>(true);
+  
+  imagesInRow = signal<number>(3);
+  showImageCaptions = signal<boolean>(true);
+  showImageData = signal<boolean>(false);
+  showImageTags = signal<boolean>(false);
 
   toggleDefaultModeByTime(): void {
-    this.isDefaultModeByTime$.next(!this.isDefaultModeByTime$.value);
+    this.isDefaultModeByTime.update(value => !value);
   }
 
   toggleDefaultModeByData(): void {
-    this.isDefaultModeByData$.next(!this.isDefaultModeByData$.value);
+    this.isDefaultModeByData.update(value => !value);
   }
 
   togglePanelVisibility(): void {
-    this.isPanelVisible$.next(!this.isPanelVisible$.value);
+    this.isPanelVisible.update(value => !value);
   }
 
   toggleOverlay(): void {
-    this.isOverlayVisible$.next(!this.isOverlayVisible$.value);
+    this.isOverlayVisible.update(value => !value);
   }
 
   toggleSelectOnMouseover(): void {
-    this.isMouseoverSelectAllowed$.next(!this.isMouseoverSelectAllowed$.value);
+    this.isMouseoverSelectAllowed.update(value => !value);
   }
 
   toggleImageInfo(): void {
-    this.showImageInfo$.next(!this.showImageInfo$.value);
+    this.showImageInfo.update(value => !value);
   }
 
   setImagesInRow(imagesInRow: number): void {
-    this.imagesInRow$.next(imagesInRow);
+    this.imagesInRow.set(imagesInRow);
   }
 
   toggleImageCaptions(): void {
-    this.showImageCaptions$.next(!this.showImageCaptions$.value);
+    this.showImageCaptions.update(value => !value);
   }
 
   toggleImageData(): void {
-    this.showImageData$.next(!this.showImageData$.value);
+    this.showImageData.update(value => !value);
   }
 
   toggleImageTags(): void {
-    this.showImageTags$.next(!this.showImageTags$.value);
+    this.showImageTags.update(value => !value);
   }
 
 }

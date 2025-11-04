@@ -1,4 +1,4 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, Signal, input, computed } from '@angular/core';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
 import { NAVIGATION_TABS, NavigationTabId } from '../../../constants/navigation-tabs';
@@ -29,7 +29,7 @@ export class NavigationAreaComponent {
   tabs: NavigationTabData[];
   selectedTab: NavigationTabData;
 
-  width!: ScreenWidth;
+  width: Signal<ScreenWidth>;
   isCollapsed = computed<Record<NavigationTabId, Record<string, boolean>>>(() => 
     this.initialVisualState(this.tabs)
   );
@@ -37,7 +37,7 @@ export class NavigationAreaComponent {
   constructor(private layout: LayoutService) {
     this.tabs = this.fillTabsWithData();
     this.selectedTab = this.tabs[DEFAULT_TAB_INDEX];
-    this.layout.screenWidth$.subscribe(screenWidth => this.width = screenWidth);
+    this.width = this.layout.screenWidth;
   }
 
   fillTabsWithData(): NavigationTabData[] {

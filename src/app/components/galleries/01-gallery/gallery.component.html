@@ -1,33 +1,31 @@
-@if (galleryData; as data) {
-  @if (selectedImage) {
+@if (gallery.images.length) {
 
-    <!-- Gallery -->
-    @if (data.isDefaultMode) {
-      <app-default-mode-gallery [gallery]="data.gallery" [(selectedImage)]="selectedImage" />
-    } @else {
-      <app-grid-mode-gallery [gallery]="data.gallery" [(selectedImage)]="selectedImage" />
-    }
-  
-    <!-- Overlay -->
-    @if (data.isOverlayVisible) {
-      <div class="overlay" (click)="toggleOverlay()">
-        <app-selected-image
-          [gallery]="data.gallery"
-          [(image)]="selectedImage"
-          [isOverlay]="true"
-          (click)="$event.stopPropagation()"
-        />
-      </div>
-    }
-    
-    <!-- Scroll-to-Top Button -->
-    <app-scroll-to-top />
-
+  <!-- Gallery -->
+  @if (isDefaultMode()) {
+    <app-default-mode-gallery [gallery]="gallery" [(selectedImage)]="selectedImage!" />
   } @else {
+    <app-grid-mode-gallery [gallery]="gallery" [(selectedImage)]="selectedImage!" />
+  }
 
-    <!-- Empty Gallery Placeholder -->
-    <div class="placeholder">
-      <div class="placeholder-text">Nothing to Display</div>
+  <!-- Overlay -->
+  @if (isOverlayVisible()) {
+    <div class="overlay" (click)="toggleOverlay()">
+      <app-selected-image
+        [gallery]="gallery"
+        [(image)]="selectedImage!"
+        [isOverlay]="true"
+        (click)="$event.stopPropagation()"
+      />
     </div>
   }
+  
+  <!-- Scroll-to-Top Button -->
+  <app-scroll-to-top />
+
+} @else {
+
+  <!-- Empty Gallery Placeholder -->
+  <div class="placeholder">
+    <div class="placeholder-text">Nothing to Display</div>
+  </div>
 }

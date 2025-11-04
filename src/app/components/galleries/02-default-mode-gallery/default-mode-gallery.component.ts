@@ -6,7 +6,7 @@ import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
 // Components
 import { SelectedImageComponent } from '../05-selected-image/selected-image.component';
-import { GalleryPanelComponent } from "../04-gallery-panel/gallery-panel.component";
+import { GalleryPanelComponent } from '../04-gallery-panel/gallery-panel.component';
 // Services
 import { SettingsService } from '../../../services/settings.service';
 
@@ -24,7 +24,6 @@ export class DefaultModeGalleryComponent {
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
-  displayedName: string = '';
   mouseoverIndex: number = NONE_SELECTED;
 
   constructor(private settings: SettingsService) {}
@@ -34,10 +33,10 @@ export class DefaultModeGalleryComponent {
   }
 
   mouseoverImageSelect(index: number): void {
-    if (!this.settings.isMouseoverSelectAllowed$.value) return;
+    if (!this.settings.isMouseoverSelectAllowed()) return;
     this.mouseoverIndex = index;
     timer(MOUSEOVER_SELECT_DELAY).subscribe(() => {
-      if (this.mouseoverIndex == index && this.settings.isMouseoverSelectAllowed$.value) 
+      if (this.mouseoverIndex == index && this.settings.isMouseoverSelectAllowed()) 
         this.selectImage(this.gallery().images[index]);
     });
   }

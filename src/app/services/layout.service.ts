@@ -1,22 +1,24 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, Signal } from '@angular/core';
 import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { Observable, map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BREAKPOINTS, ScreenWidth } from '../constants/screen-width';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LayoutService {
 
-  screenWidth$: Observable<ScreenWidth>;
-  isDesktop$: Observable<boolean>;
+  screenWidth: Signal<ScreenWidth>;
+  isDesktop: Signal<boolean>;
 
   constructor(private observer: BreakpointObserver) {
-    this.screenWidth$ = this.observer.observe(Object.values(BREAKPOINTS)).pipe(
+    const screenWidth: Observable<ScreenWidth> = this.observer.observe(Object.values(BREAKPOINTS)).pipe(
       map(breakpointState => this.getScreenWidthStatus(breakpointState))
     );
-    this.isDesktop$ = this.screenWidth$.pipe(
-      map(width => width !== ScreenWidth.mobile && width !== ScreenWidth.tablet)
+    this.screenWidth = toSignal(screenWidth, { requireSync: true });
+    this.isDesktop = computed(() => 
+      this.screenWidth() !== ScreenWidth.mobile && this.screenWidth() !== ScreenWidth.tablet
     );
   }
 

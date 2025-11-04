@@ -1,7 +1,6 @@
-import { Component, HostBinding, input, computed } from '@angular/core';
+import { Component, HostBinding, input, computed, Signal } from '@angular/core';
 import { LowerCasePipe, NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { combineLatest, Subscription } from 'rxjs';
 // Constants & Enums
 import { GalleryType } from '../../../constants/gallery-type.enum';
 import { IMAGE_DATA_TABS, ImageDataTabId } from '../../../constants/image-data-tabs';
@@ -15,12 +14,6 @@ import { ControlButtonComponent } from '../../ui-elements/control-button/control
 import { SettingsService } from '../../../services/settings.service';
 import { UtilityService } from '../../../services/utility.service';
 import { RouteService } from '../../../services/route.service';
-
-interface ImageDataSettings {
-  showImageCaptions: boolean;
-  showImageData: boolean;
-  showImageTags: boolean;
-}
 
 interface LocationData {
   name: string;
@@ -57,6 +50,10 @@ export class ImageDataComponent {
   data = input.required<ImageData>();
   hasTabs = input<boolean>(false);
 
+  showImageCaptions: Signal<boolean>;
+  showImageData: Signal<boolean>;
+  showImageTags: Signal<boolean>;
+
   dataTabs = computed<ImageDataTab[]>(() => this.constructDataTabs(this.hasTabs(), this.data(), this.gallery()));
   selectedTabIndex: number = 0;
 
@@ -64,17 +61,10 @@ export class ImageDataComponent {
   time = computed<TimeData>(() => this.timeData(this.data()));
   tags = computed<TagData[]>(() => this.tagsData(this.data()));
 
-  subscription: Subscription;
-  dataSettings!: ImageDataSettings;
-
   constructor(private utility: UtilityService, private settings: SettingsService, private route: RouteService) {
-    this.subscription = combineLatest([
-      this.settings.showImageCaptions$,
-      this.settings.showImageData$,
-      this.settings.showImageTags$
-    ]).subscribe(([showImageCaptions, showImageData, showImageTags]) => {
-      this.dataSettings = { showImageCaptions, showImageData, showImageTags }
-    });
+    this.showImageCaptions = this.settings.showImageCaptions;
+    this.showImageData = this.settings.showImageData;
+    this.showImageTags = this.settings.showImageTags;
   }
 
   constructDataTabs(hasTabs: boolean, data: ImageData, gallery: Gallery): ImageDataTab[] {
@@ -118,10 +108,6 @@ export class ImageDataComponent {
       tag,
       tagURL: `/${this.route.tagRoute(tag)}`
     }));
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }

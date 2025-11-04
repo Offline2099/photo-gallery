@@ -1,4 +1,4 @@
-@if (state.isDesktop) {
+@if (isDesktop()) {
 
   <!-- Gallery Name Panel, Settings Toggle Button -->
   <div class="gallery-name-panel">
@@ -12,7 +12,7 @@
   </div>
 
   <!-- Settings Panel for Desktop -->
-  @if (state.isPanelVisible) {
+  @if (isPanelVisible()) {
     <div class="settings-panel" [ngClass]="{'full-width': !isDefaultMode()}">
 
       <!-- Panel Header -->
@@ -47,7 +47,7 @@
           <div class="panel-block-controls">
             <app-control-button
               [hasSwitch]="true"
-              [isSwitchOn]="state.showImageInfo"
+              [isSwitchOn]="showImageInfo()"
               text="Show Image Info"
               (click)="toggleImageInfo()"
             />
@@ -62,7 +62,7 @@
           <div class="panel-block-controls">
             <app-control-button
               [hasSwitch]="true"
-              [isSwitchOn]="state.isMouseoverSelectAllowed"
+              [isSwitchOn]="isMouseoverSelectAllowed()"
               text="No-Click Mode"
               (click)="toggleSelectOnMouseover()"
             />
@@ -79,19 +79,19 @@
           <div class="panel-block-controls">
             <app-control-button
               [hasSwitch]="true"
-              [isSwitchOn]="state.showImageCaptions"
+              [isSwitchOn]="showImageCaptions()"
               text="Text"
               (click)="toggleImageCaptions()"
             />
             <app-control-button
               [hasSwitch]="true"
-              [isSwitchOn]="state.showImageData"
+              [isSwitchOn]="showImageData()"
               text="Data"
               (click)="toggleImageData()"
             />
             <app-control-button
               [hasSwitch]="true"
-              [isSwitchOn]="state.showImageTags"
+              [isSwitchOn]="showImageTags()"
               text="Tags"
               (click)="toggleImageTags()"
             />
@@ -105,9 +105,9 @@
         <div class="panel-block">
           <div class="panel-block-controls">
             <span class="panel-block-controls-text">Images per Row:</span>
-            @for (button of [].constructor(state.isDesktopWide ? 4 : 3); track $index) {
+            @for (button of [].constructor(maxImagesInRow()); track $index) {
               <app-control-button
-                [isSelected]="state.imagesInRow === $index + 1"
+                [isSelected]="imagesInRow() === $index + 1"
                 text="{{$index + 1}}"
                 (click)="setImagesInRow($index + 1)"
               />
@@ -128,19 +128,19 @@
   <div class="settings-panel-simple">
     <app-control-button
       [hasSwitch]="true"
-      [isSwitchOn]="state.showImageCaptions"
+      [isSwitchOn]="showImageCaptions()"
       text="Captions"
       (click)="toggleImageCaptions()"
     />
     <app-control-button
       [hasSwitch]="true"
-      [isSwitchOn]="state.showImageData"
+      [isSwitchOn]="showImageData()"
       text="Data"
       (click)="toggleImageData()"
     />
     <app-control-button
       [hasSwitch]="true"
-      [isSwitchOn]="state.showImageTags"
+      [isSwitchOn]="showImageTags()"
       text="Tags"
       (click)="toggleImageTags()" 
     />

@@ -1,6 +1,5 @@
-import { Component, input, computed } from '@angular/core';
+import { Component, Signal, input, computed } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Subscription, combineLatest } from 'rxjs';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
 // Interfaces
@@ -11,18 +10,6 @@ import { ControlButtonComponent } from '../../ui-elements/control-button/control
 import { DataService } from '../../../services/data.service';
 import { LayoutService } from '../../../services/layout.service';
 import { SettingsService } from '../../../services/settings.service';
-
-interface CurrentState {
-  isDesktop: boolean;
-  isDesktopWide: boolean;
-  isPanelVisible: boolean;
-  isMouseoverSelectAllowed: boolean;
-  showImageInfo: boolean;
-  imagesInRow: number;
-  showImageCaptions: boolean;
-  showImageData: boolean;
-  showImageTags: boolean;
-}
 
 @Component({
   selector: 'app-gallery-panel',
@@ -37,41 +24,29 @@ export class GalleryPanelComponent {
 
   displayedName = computed<string>(() => this.displayedGalleryName(this.isDefaultMode(), this.gallery()));
 
-  subscription: Subscription;
-  state!: CurrentState;
+  isDesktop: Signal<boolean>;
+
+  isPanelVisible: Signal<boolean>;
+  isMouseoverSelectAllowed: Signal<boolean>;
+  showImageInfo: Signal<boolean>;
+  imagesInRow: Signal<number>;
+  showImageCaptions: Signal<boolean>;
+  showImageData: Signal<boolean>;
+  showImageTags: Signal<boolean>;
+
+  maxImagesInRow = computed<number>(() => 
+    this.layout.screenWidth() === ScreenWidth.desktopWide ? 4 : 3
+  );
 
   constructor(private data: DataService, private layout: LayoutService, private settings: SettingsService) {
-    this.subscription = combineLatest([
-      this.layout.screenWidth$,
-      this.layout.isDesktop$,
-      this.settings.isPanelVisible$,
-      this.settings.isMouseoverSelectAllowed$,
-      this.settings.showImageInfo$,
-      this.settings.imagesInRow$,
-      this.settings.showImageCaptions$,
-      this.settings.showImageData$,
-      this.settings.showImageTags$
-    ]).subscribe(([
-      width,
-      isDesktop,
-      isPanelVisible,
-      isMouseoverSelectAllowed,
-      showImageInfo,
-      imagesInRow,
-      showImageCaptions,
-      showImageData,
-      showImageTags
-    ]) => this.state = {
-      isDesktop,
-      isDesktopWide: width === ScreenWidth.desktopWide,
-      isPanelVisible,
-      isMouseoverSelectAllowed,
-      showImageInfo,
-      imagesInRow,
-      showImageCaptions,
-      showImageData,
-      showImageTags
-    });
+    this.isDesktop = this.layout.isDesktop;
+    this.isPanelVisible = this.settings.isPanelVisible;
+    this.isMouseoverSelectAllowed = this.settings.isMouseoverSelectAllowed;
+    this.showImageInfo = this.settings.showImageInfo;
+    this.imagesInRow = this.settings.imagesInRow;
+    this.showImageCaptions = this.settings.showImageCaptions;
+    this.showImageData = this.settings.showImageData;
+    this.showImageTags = this.settings.showImageTags;
   }
 
   displayedGalleryName(isDefaultMode: boolean, gallery: Gallery): string {
@@ -112,10 +87,6 @@ export class GalleryPanelComponent {
 
   toggleImageTags(): void {
     this.settings.toggleImageTags();
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }

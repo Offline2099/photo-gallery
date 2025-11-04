@@ -1,6 +1,5 @@
-import { Component, HostBinding, input, model, computed, effect } from '@angular/core';
+import { Component, HostBinding, Signal, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Subscription, combineLatest } from 'rxjs';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
 import { GalleryType } from '../../../constants/gallery-type.enum';
@@ -23,8 +22,12 @@ import { UtilityService } from '../../../services/utility.service';
 })
 export class SelectedImageComponent {
 
-  @HostBinding('class.overlay-mode') get _isOverlay(): boolean { return this.isOverlay() }
-  @HostBinding('class.no-data') get _noInfo(): boolean { return !this.showInfo }
+  @HostBinding('class.overlay-mode') get _isOverlay(): boolean {
+    return this.isOverlay();
+  }
+  @HostBinding('class.no-data') get noInfo(): boolean {
+    return !this.showImageInfo();
+  }
 
   gallery = input.required<Gallery>();
   image = model.required<ImageData>();
@@ -37,24 +40,17 @@ export class SelectedImageComponent {
   
   isLoading: boolean = true;
 
-  subscription: Subscription;
-  isDesktopSmall!: boolean;
-  showInfo!: boolean;
+  showImageInfo: Signal<boolean>;
+  isDesktopSmall = computed<boolean>(() => this.layout.screenWidth() === ScreenWidth.desktopSmall);
 
   constructor(
     private layout: LayoutService,
     private settings: SettingsService,
     private utility: UtilityService
   ) {
+    this.showImageInfo = this.settings.showImageInfo;
     effect(() => {
       if (this.image()) this.isLoading = true;
-    });
-    this.subscription = combineLatest([
-      this.layout.screenWidth$,
-      this.settings.showImageInfo$
-    ]).subscribe(([width, showInfo]) => {
-      this.isDesktopSmall = width === ScreenWidth.desktopSmall;
-      this.showInfo = showInfo;
     });
   }
 
@@ -95,10 +91,6 @@ export class SelectedImageComponent {
 
   toggleOverlay(): void {
     this.settings.toggleOverlay();
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }

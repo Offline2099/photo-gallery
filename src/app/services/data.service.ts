@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map, of, tap } from 'rxjs';
+import { Observable, map, tap, of, catchError } from 'rxjs';
 // Constants & Enums
 import { LOCATION_GROUPS } from '../constants/locations';
 import { TAG_GROUPS } from '../constants/tags';
@@ -21,18 +21,22 @@ const DATA_URL: string = 'data/image-data.json';
 })
 export class DataService {
 
-  private galleries: DefaultGalleries | null = null;
+  galleries: DefaultGalleries | null = null;
   private areGalleriesConstructed: boolean = false;
 
   constructor(private http: HttpClient, private utility: UtilityService, private route: RouteService) {}
 
-  getGalleries(): Observable<DefaultGalleries> {
+  getGalleries(): Observable<DefaultGalleries | null> {
     if (this.areGalleriesConstructed) return of(this.galleries as DefaultGalleries);
     return this.http.get<ImageData[]>(DATA_URL).pipe(
       map(data => this.constructGalleries(data)),
       tap(galleries => {
         this.galleries = galleries;
         this.areGalleriesConstructed = true;
+      }),
+      catchError(error => {
+        console.error('Error fetching dynamic routes:', error);
+        return of(null);
       })
     );
   }

@@ -48,12 +48,12 @@
 @else {
 
   <!-- Caption -->
-  @if (data().caption && dataSettings.showImageCaptions) {
+  @if (data().caption && showImageCaptions()) {
     <div class="image-data-section">{{data().caption}}</div> 
   }
 
   <!-- Data (Location, Time) -->
-  @if (dataSettings.showImageData) {
+  @if (showImageData()) {
 
     <!-- Location -->
     @if (location(); as location) {
@@ -71,7 +71,7 @@
   }
 
   <!-- Tags -->
-  @if (data().tags?.length && dataSettings.showImageTags) {
+  @if (data().tags?.length && showImageTags()) {
     <div class="image-data-section">
       <ng-template [ngTemplateOutlet]="tagsData" [ngTemplateOutletContext]="{tags: tags()}" />
     </div>

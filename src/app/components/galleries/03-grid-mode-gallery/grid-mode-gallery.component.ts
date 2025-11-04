@@ -1,6 +1,5 @@
-import { Component, HostBinding, input, model } from '@angular/core';
+import { Component, HostBinding, Signal, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
-import { Subscription, combineLatest } from 'rxjs';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
 // Interfaces
@@ -22,33 +21,23 @@ import { SettingsService } from '../../../services/settings.service';
 export class GridModeGalleryComponent {
 
   @HostBinding('class') get galleryClasses(): string {
-    return `grid-${this.imagesInRow}` + (this.isDesktop ? ' desktop' : '');
+    return `grid-${this.imagesInRow()}` + (this.layout.isDesktop() ? ' desktop' : '');
   }
 
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
-  subscription: Subscription;
-  isDesktop!: boolean;
-  imagesInRow!: number;
-  isClickAllowed!: boolean;
-  isAnyDataVisible!: boolean;
+  imagesInRow: Signal<number>;
+
+  isSmallImage = computed<boolean>(() => !this.layout.isDesktop() || this.imagesInRow() > 2)
+  isClickAllowed = computed<boolean>(() => this.layout.isDesktop() && this.imagesInRow() !== 1);
+  isAnyDataVisible = computed<boolean>(() => 
+    this.settings.showImageCaptions() || this.settings.showImageData() || this.settings.showImageTags()
+  );
 
   constructor(private layout: LayoutService, private settings: SettingsService) {
-    this.subscription = combineLatest([
-      this.layout.screenWidth$,
-      this.layout.isDesktop$,
-      this.settings.imagesInRow$,
-      this.settings.showImageCaptions$,
-      this.settings.showImageData$,
-      this.settings.showImageTags$
-    ]).subscribe(([screenWidth, isDesktop, imagesInRow, showCaptions, showData, showTags]) => {
-      this.adjustImagesInRow(imagesInRow, screenWidth);
-      this.isDesktop = isDesktop;
-      this.imagesInRow = imagesInRow;
-      this.isClickAllowed = isDesktop && imagesInRow !== 1;
-      this.isAnyDataVisible = showCaptions || showData || showTags;
-    });
+    this.imagesInRow = this.settings.imagesInRow;
+    effect(() => this.adjustImagesInRow(this.imagesInRow(), this.layout.screenWidth()));
   }
 
   adjustImagesInRow(imagesInRow: number, screenWidth: ScreenWidth): void {
@@ -57,13 +46,9 @@ export class GridModeGalleryComponent {
   }
 
   toggleOverlay(image: ImageData): void {
-    if (!this.isClickAllowed) return;
+    if (!this.isClickAllowed()) return;
     this.selectedImage.set(image);
     this.settings.toggleOverlay();
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) this.subscription.unsubscribe();
   }
 
 }

@@ -11,7 +11,7 @@ import { UtilityService } from './utility.service';
 })
 export class RouteService {
 
-  areRoutesConstructed: boolean = false;
+  private areRoutesConstructed: boolean = false;
 
   constructor(private router: Router, private utility: UtilityService) {}
 
@@ -43,7 +43,8 @@ export class RouteService {
       ...this.routesForGalleries(galleries.byYear),
       ...this.routesForGalleriesInGroups(galleries.byMonth),
       ...this.routesForGalleriesInGroups(galleries.byLocation),
-      ...this.routesForGalleriesInGroups(galleries.byTag)
+      ...this.routesForGalleriesInGroups(galleries.byTag),
+      { path: '**', redirectTo: '', pathMatch: 'full' }
     ]);
   }
 
@@ -56,7 +57,7 @@ export class RouteService {
       path: gallery.path,
       component: GalleryComponent,
       data: { gallery }
-    }))
+    }));
   }
 
 }
