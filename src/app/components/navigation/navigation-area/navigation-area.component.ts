@@ -17,6 +17,8 @@ import { RouteService } from '../../../services/route.service';
 
 const DEFAULT_TAB_INDEX = 0;
 
+type CollapsedState = Record<NavigationTabId, Record<string, boolean>>;
+
 @Component({
   selector: 'app-navigation-area',
   imports: [ControlButtonComponent, ControlButtonGroupComponent],
@@ -33,7 +35,7 @@ export class NavigationAreaComponent {
   selectedTab: NavigationTabData;
 
   width: Signal<ScreenWidth>;
-  isCollapsed = computed<Record<NavigationTabId, Record<string, boolean>>>(() => 
+  isCollapsed = computed<CollapsedState>(() => 
     this.initialVisualState(this.tabs)
   );
 
@@ -66,14 +68,14 @@ export class NavigationAreaComponent {
     }
   }
 
-  initialVisualState(tabs: NavigationTabData[]): Record<NavigationTabId, Record<string, boolean>> {
-    return tabs.reduce((accOuter, tab) => {
-      accOuter[tab.id] = tab.galleryGroups().reduce((accInner, group) => {
-        accInner[group.name] = true;
-        return accInner;
+  initialVisualState(tabs: NavigationTabData[]): CollapsedState {
+    return tabs.reduce((accTab, tab) => {
+      accTab[tab.id] = tab.galleryGroups().reduce((accGroup, group) => {
+        accGroup[group.id] = true;
+        return accGroup;
       }, {} as Record<string, boolean>);
-      return accOuter;
-    }, {} as Record<NavigationTabId, Record<string, boolean>>)
+      return accTab;
+    }, {} as CollapsedState);
   }
 
   setTabByURL(url: string): void {

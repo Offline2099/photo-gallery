@@ -22,11 +22,11 @@
     <!-- Two Column Layout -->
     @for (column of [].constructor(2); let $column = $index; track $index) {
       <div class="column">
-        @for (group of selectedTab.galleryGroups(); track group.name) {
+        @for (group of selectedTab.galleryGroups(); track group.id) {
           @if (!$column && $even || $column && $odd) {
             <app-control-button-group
               [group]="group"
-              [(isCollapsed)]="isCollapsed()[selectedTab.id][group.name]"
+              [(isCollapsed)]="isCollapsed()[selectedTab.id][group.id]"
               [countImages]="selectedTab.countImages"
             />
           }
@@ -35,10 +35,10 @@
     }
   } @else {
     <!-- One Column Layout -->
-    @for (group of selectedTab.galleryGroups(); track group.name) {
+    @for (group of selectedTab.galleryGroups(); track group.id) {
       <app-control-button-group
         [group]="group"
-        [(isCollapsed)]="isCollapsed()[selectedTab.id][group.name]"
+        [(isCollapsed)]="isCollapsed()[selectedTab.id][group.id]"
         [countImages]="selectedTab.countImages"
       />
     }

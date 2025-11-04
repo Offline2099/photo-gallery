@@ -87,6 +87,7 @@ export class DataService {
 
   private createGalleriesByMonth(data: Record<number, Record<number, ImageData[]>>): GalleryGroup[] {
     return Object.entries(data).map(([year, dataByMonth]) => ({
+      id: `by-year-${year}`,
       name: year,
       path: year,
       galleries: Object.entries(dataByMonth).map(([month, images]) => {
@@ -107,6 +108,7 @@ export class DataService {
 
   private createGalleriesByLocation(data: Record<string, ImageData[]>): GalleryGroup[] {
     return LOCATION_GROUPS.map(group => ({
+      id: `by-location-${this.utility.toDashCase(group.name)}`,
       name: group.name,
       galleries: group.locations.map(location => ({
         type: GalleryType.location,
@@ -122,6 +124,7 @@ export class DataService {
 
   private createGalleriesByTag(data: Record<string, ImageData[]>): GalleryGroup[] {
     return TAG_GROUPS.map(group => ({
+      id: `by-tag-${this.utility.toDashCase(group.name)}`,
       name: group.name,
       galleries: group.tags.map(tag => {
         const capitalizedTag: string = this.utility.capitalizeFirstLetter(tag);
