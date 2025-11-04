@@ -1,4 +1,6 @@
 import { Component, Signal, input, computed } from '@angular/core';
+import { ActivationEnd, Router } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
 import { NAVIGATION_TABS, NavigationTabId } from '../../../constants/navigation-tabs';
@@ -11,6 +13,7 @@ import { ControlButtonComponent } from '../../ui-elements/control-button/control
 import { ControlButtonGroupComponent } from '../control-button-group/control-button-group.component';
 // Services
 import { LayoutService } from '../../../services/layout.service';
+import { RouteService } from '../../../services/route.service';
 
 const DEFAULT_TAB_INDEX = 0;
 
@@ -34,10 +37,13 @@ export class NavigationAreaComponent {
     this.initialVisualState(this.tabs)
   );
 
-  constructor(private layout: LayoutService) {
+  constructor(private router: Router, private routes: RouteService, private layout: LayoutService) {
+    this.width = this.layout.screenWidth;
     this.tabs = this.fillTabsWithData();
     this.selectedTab = this.tabs[DEFAULT_TAB_INDEX];
-    this.width = this.layout.screenWidth;
+    this.router.events.pipe(takeUntilDestroyed()).subscribe(event => {
+      if (event instanceof ActivationEnd) this.setTabByURL(this.router.url);
+    });
   }
 
   fillTabsWithData(): NavigationTabData[] {
@@ -68,6 +74,14 @@ export class NavigationAreaComponent {
       }, {} as Record<string, boolean>);
       return accOuter;
     }, {} as Record<NavigationTabId, Record<string, boolean>>)
+  }
+
+  setTabByURL(url: string): void {
+    this.selectedTab = this.routes.isLocationRoute(url)
+      ? this.tabs.find(tab => tab.id === NavigationTabId.places)!
+      : this.routes.isTagRoute(url)
+        ? this.tabs.find(tab => tab.id === NavigationTabId.tags)!
+        : this.tabs[DEFAULT_TAB_INDEX];
   }
 
   selectTab(tab: NavigationTabData): void {

@@ -35,6 +35,7 @@ export class GalleryComponent {
   ) {
     this.gallery = this.route.snapshot.data['gallery'];
     this.selectedImage = this.gallery.images[0] || null;
+    if (this.settings.isOverlayVisible()) this.settings.toggleOverlay();
   }
 
   ngAfterViewInit(): void {

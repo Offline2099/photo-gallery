@@ -6,6 +6,9 @@ import { GalleryComponent } from '../components/galleries/01-gallery/gallery.com
 import { GalleryGroup } from '../types/galleries/gallery-group.interface';
 import { UtilityService } from './utility.service';
 
+const LOCATIONS_PATH: string = 'places';
+const TAGS_PATH: string = 'tags';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -30,11 +33,19 @@ export class RouteService {
   }
 
   locationRoute(location: string): string {
-    return `places/${this.utility.toDashCase(location)}`;
+    return `${LOCATIONS_PATH}/${this.utility.toDashCase(location)}`;
   }
 
   tagRoute(tag: string): string {
-    return `tags/${this.utility.toDashCase(tag)}`;
+    return `${TAGS_PATH}/${this.utility.toDashCase(tag)}`;
+  }
+
+  isLocationRoute(url: string): boolean {
+    return url.includes(`/${LOCATIONS_PATH}/`);
+  }
+
+  isTagRoute(url: string): boolean {
+    return url.includes(`/${TAGS_PATH}/`);
   }
 
   private addRoutesForDefaultGalleries(galleries: DefaultGalleries): void {
