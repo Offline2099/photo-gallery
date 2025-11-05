@@ -9,7 +9,7 @@
 
   <!-- Overlay -->
   @if (isOverlayVisible()) {
-    <div class="overlay" (click)="toggleOverlay()">
+    <div #scrollTarget class="overlay" (click)="toggleOverlay()">
       <app-selected-image
         [gallery]="gallery"
         [(image)]="selectedImage!"

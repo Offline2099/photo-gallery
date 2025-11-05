@@ -1,5 +1,6 @@
-import { Component, computed } from '@angular/core';
+import { Component, ElementRef, computed, effect, viewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
@@ -27,6 +28,8 @@ export class GalleryComponent {
   isDefaultMode = computed<boolean>(() => this.isDefaultGalleryMode(this.gallery));
   isOverlayVisible = computed<boolean>(() => this.layout.isDesktop() && this.settings.isOverlayVisible());
 
+  scrollTarget = viewChild<ElementRef>('scrollTarget');
+
   constructor(
     private route: ActivatedRoute,
     private data: DataService,
@@ -36,6 +39,13 @@ export class GalleryComponent {
     this.gallery = this.route.snapshot.data['gallery'];
     this.selectedImage = this.gallery.images[0] || null;
     if (this.settings.isOverlayVisible()) this.settings.toggleOverlay();
+    effect(() => {
+      if (this.isOverlayVisible()) {
+        if (this.scrollTarget())
+          disableBodyScroll(this.scrollTarget()?.nativeElement, { reserveScrollBarGap: true });
+      }
+      else clearAllBodyScrollLocks();
+    });
   }
 
   ngAfterViewInit(): void {
