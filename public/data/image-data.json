@@ -9837,5 +9837,627 @@
       "morning",
       "panorama"
     ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "1",
+    "caption": "A monument at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "park",
+      "morning"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "2",
+    "caption": "A view of Pattaya Bay from Phra Tamnak Hill early in the morning.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "boats",
+      "city",
+      "panorama",
+      "morning"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "3",
+    "caption": "A view of Pattaya Bay from Phra Tamnak Hill early in the morning.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "boats",
+      "city",
+      "panorama",
+      "morning",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "4",
+    "caption": "A road on Phra Tamnak Hill, with canopies of nearby trees lit by the morning sun.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "road",
+      "trees",
+      "morning"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "5",
+    "caption": "A view of Pattaya Bay from Phra Tamnak Hill early in the morning.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "boats",
+      "trees",
+      "panorama",
+      "city",
+      "morning"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "6",
+    "caption": "Pattaya Lighthouse lit by the morning sun, with a boat moving in the distance.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "landmark",
+      "boats",
+      "trees",
+      "morning"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "7",
+    "caption": "A sunrise over Pattaya, viewed through the trees at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "sunrise",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "8",
+    "caption": "A sunrise over Pattaya, viewed from the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "sunrise",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "9",
+    "caption": "The sun is rising over Pattaya, viewed through the trees at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "city",
+      "park",
+      "trees",
+      "sunrise"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "10",
+    "caption": "A view of Pattaya through the trees at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "city",
+      "park",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "11",
+    "caption": "The island of Ko Lan as seen through the branches of a tree on the shore near Pattaya.",
+    "location": {
+      "name": "Pattaya"
+    },
+    "tags": [
+      
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "12",
+    "caption": "A boat is heading toward the island of Ko Lan under the moon at early morning.",
+    "location": {
+      "name": "Pattaya"
+    },
+    "tags": [
+      "islands",
+      "boats"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "13",
+    "caption": "Purple plumeria blooms at the shore, with the island of Ko Lan visible in the distance.",
+    "location": {
+      "name": "Pattaya"
+    },
+    "tags": [
+      "flowers",
+      "islands"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "14",
+    "caption": "Bougainvillea blooms at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "flowers"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "15",
+    "caption": "Bougainvillea blooms at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "flowers"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "16",
+    "caption": "A paved path is winding down the the slope of Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "park",
+      "road"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "2",
+    "index": "17",
+    "caption": "A paved path goes up and down the the slope of Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "park",
+      "road"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "1",
+    "caption": "Flowers bloom near the viewpoint on top of Phra Tamnak Hill at sunrise.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "city",
+      "flowers",
+      "sunrise",
+      "panorama",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "2",
+    "caption": "A local couple at the viewpoint on top of Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "people",
+      "city",
+      "flowers",
+      "sunrise"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "3",
+    "caption": "Pink and yellow bougainvillea lit by the rising sun.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "flowers",
+      "trees",
+      "sunrise"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "4",
+    "caption": "A sunrise over Pattaya, viewed through the branches of tropical trees.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "trees",
+      "sunrise"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "5",
+    "caption": "A sunrise over Pattaya, viewed through the branches of tropical trees.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "trees",
+      "panorama",
+      "sunrise",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "6",
+    "caption": "A staircase towards the Buddha statue on the top of Phra Tamnak Hill, decorated with serpent-like figures.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "temple",
+      "statue"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "7",
+    "caption": "A staircase towards the Buddha statue on the top of Phra Tamnak Hill, decorated with serpent-like figures.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "temple",
+      "statue"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "8",
+    "caption": "Red bougainvillea blooms on Phra Tamnak Hill, with the Pattaya Park Hotel tower visible in the distance behind the trees.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "flowers",
+      "landmark",
+      "panorama",
+      "trees",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "9",
+    "caption": "A view from Phra Tamnak Hill towards the Pattaya Park Hotel tower.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "city",
+      "landmark",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "10",
+    "caption": "A view from Phra Tamnak Hill towards the Pattaya Park Hotel tower.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "city",
+      "landmark",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "11",
+    "caption": "A statue at the side of a path on top of Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "statue",
+      "park",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "12",
+    "caption": "Pattaya City sign, viewed from the shore of Pattaya Bay.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "landmark",
+      "hills"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "13",
+    "caption": "Boats in Pattaya Bay, with Pattaya skyline in the distance.",
+    "location": {
+      "name": "Pattaya"
+    },
+    "tags": [
+      "boats",
+      "trees",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "4",
+    "index": "14",
+    "caption": "Boats in Pattaya Bay, viewed from the beach.",
+    "location": {
+      "name": "Pattaya Beach",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "beach",
+      "boats",
+      "trees"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "1",
+    "caption": "A view of Pattaya from Phra Tamnak Hill at early sunrise. Morning fog envelops the hills in the distance.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "sunrise",
+      "city", 
+      "fog"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "2",
+    "caption": "Bougainvillea blooms at the park on Phra Tamnak Hill at sunrise.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "flowers",
+      "sunrise"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "3",
+    "caption": "A view of Pattaya from Phra Tamnak Hill at sunrise, with bougainvillea blooming on the left.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "sunrise",
+      "city",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "4",
+    "caption": "A view of Pattaya from Phra Tamnak Hill at sunrise.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "sunrise",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "5",
+    "caption": "A view of Pattaya from Phra Tamnak Hill at sunrise.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "sunrise",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "6",
+    "caption": "A view of Pattaya from Phra Tamnak Hill at sunrise.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "sunrise",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "7",
+    "caption": "A view of Pattaya from Phra Tamnak Hill at sunrise.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "panorama",
+      "trees",
+      "sunrise",
+      "city"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "8",
+    "caption": "A path junction with some beautiful blooming trees on the slope of Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "park",
+      "trees",
+      "road"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "9",
+    "caption": "Pigeons on the roof of a gazebo at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "animals"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "10",
+    "caption": "Bougainvillea blooms at the park on Phra Tamnak Hill.",
+    "location": {
+      "name": "Khao Phra Tamnak",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "flowers"
+    ]
+  },
+  {
+    "year": "2023",
+    "month": "6",
+    "index": "11",
+    "caption": "Rain clouds over the Gulf of Thailand, with the island of Ko Rin visible in the distance.",
+    "location": {
+      "name": "Yinyom Beach",
+      "areaName": "Pattaya"
+    },
+    "tags": [
+      "beach",
+      "islands",
+      "rain"
+    ]
   }
 ]
