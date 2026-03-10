@@ -1,4 +1,4 @@
-import { Component, HostBinding, input, computed, Signal } from '@angular/core';
+import { Component, input, computed, Signal } from '@angular/core';
 import { LowerCasePipe, NgTemplateOutlet } from '@angular/common';
 import { RouterLink } from '@angular/router';
 // Constants & Enums
@@ -35,13 +35,12 @@ interface TagData {
 
 @Component({
   selector: 'app-image-data',
+  host: { '[class.has-tabs]': 'hasTabs()' },
   imports: [NgTemplateOutlet, RouterLink, LowerCasePipe, ControlButtonComponent],
   templateUrl: './image-data.component.html',
   styleUrl: './image-data.component.scss'
 })
 export class ImageDataComponent {
-
-  @HostBinding('class.has-tabs') get _hasTabs(): boolean { return this.hasTabs() }
 
   readonly GalleryType = GalleryType;
   readonly ImageDataTabId = ImageDataTabId;

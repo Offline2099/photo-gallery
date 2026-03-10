@@ -1,4 +1,4 @@
-import { Component, HostBinding, Signal, input, model, computed, effect } from '@angular/core';
+import { Component, Signal, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
@@ -14,21 +14,19 @@ import { SettingsService } from '../../../services/settings.service';
 
 @Component({
   selector: 'app-grid-mode-gallery',
+  host: { '[class]': 'galleryClass()' },
   imports: [NgClass, GalleryPanelComponent, ImageDataComponent],
   templateUrl: './grid-mode-gallery.component.html',
   styleUrl: './grid-mode-gallery.component.scss'
 })
 export class GridModeGalleryComponent {
 
-  @HostBinding('class') get galleryClasses(): string {
-    return `grid-${this.imagesInRow()}` + (this.layout.isDesktop() ? ' desktop' : '');
-  }
-
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
   imagesInRow: Signal<number>;
 
+  galleryClass = computed<string>(() => `grid-${this.imagesInRow()}` + (this.layout.isDesktop() ? ' desktop' : ''));
   isSmallImage = computed<boolean>(() => !this.layout.isDesktop() || this.imagesInRow() > 2)
   isClickAllowed = computed<boolean>(() => this.layout.isDesktop() && this.imagesInRow() !== 1);
   isAnyDataVisible = computed<boolean>(() => 

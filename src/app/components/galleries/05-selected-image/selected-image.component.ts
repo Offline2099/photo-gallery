@@ -1,4 +1,4 @@
-import { Component, HostBinding, Signal, input, model, computed, effect } from '@angular/core';
+import { Component, Signal, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
 // Constants & Enums
 import { ScreenWidth } from '../../../constants/screen-width';
@@ -16,18 +16,15 @@ import { UtilityService } from '../../../services/utility.service';
 
 @Component({
   selector: 'app-selected-image',
+  host: {
+    '[class.overlay-mode]': 'isOverlay()',
+    '[class.no-data]': '!this.showImageInfo()'
+  },
   imports: [NgClass, ControlButtonComponent, ImageDataComponent],
   templateUrl: './selected-image.component.html',
   styleUrl: './selected-image.component.scss'
 })
 export class SelectedImageComponent {
-
-  @HostBinding('class.overlay-mode') get _isOverlay(): boolean {
-    return this.isOverlay();
-  }
-  @HostBinding('class.no-data') get noInfo(): boolean {
-    return !this.showImageInfo();
-  }
 
   gallery = input.required<Gallery>();
   image = model.required<ImageData>();
