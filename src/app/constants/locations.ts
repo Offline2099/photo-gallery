@@ -31,12 +31,16 @@ export enum Location {
   khaoDin = 'Khao Din',
   khaoPhai = 'Khao Phai',
   khaoMaiKaeo = 'Khao Mai Kaeo',
+  kualaLumpur = 'Kuala Lumpur',
+  perdanaBotanicalGardens = 'Perdana Botanical Gardens',
+  aseanSculptureGarden = 'ASEAN Sculpture Garden'
 }
 
 export const LOCATION_GROUPS: LocationGroup[] = [
   {
     name: 'Cities\xa0and Regions',
     locations: [
+      Location.kualaLumpur,
       Location.bangkok,
       Location.pattaya,
       Location.northOfPattaya,
@@ -55,7 +59,9 @@ export const LOCATION_GROUPS: LocationGroup[] = [
       Location.watYansangwararam,
       Location.pongPublicPark,
       Location.lanPhoPark,
-      Location.siamCountryClub
+      Location.siamCountryClub,
+      Location.perdanaBotanicalGardens,
+      Location.aseanSculptureGarden
     ]
   },
   {
