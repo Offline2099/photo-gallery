@@ -33,7 +33,8 @@ export enum Location {
   khaoMaiKaeo = 'Khao Mai Kaeo',
   kualaLumpur = 'Kuala Lumpur',
   perdanaBotanicalGardens = 'Perdana Botanical Gardens',
-  aseanSculptureGarden = 'ASEAN Sculpture Garden'
+  aseanSculptureGarden = 'ASEAN Sculpture Garden',
+  klccPark = "KLCC Park"
 }
 
 export const LOCATION_GROUPS: LocationGroup[] = [
@@ -61,7 +62,8 @@ export const LOCATION_GROUPS: LocationGroup[] = [
       Location.lanPhoPark,
       Location.siamCountryClub,
       Location.perdanaBotanicalGardens,
-      Location.aseanSculptureGarden
+      Location.aseanSculptureGarden,
+      Location.klccPark
     ]
   },
   {
