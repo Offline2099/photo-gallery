@@ -21,6 +21,7 @@ export enum Tag {
   beach = 'beach',
   park = 'park',
   forest = 'forest',
+  graveyard = 'graveyard',
   countryside = 'countryside',
   zoo = 'zoo',
   sunny = 'sunny',
@@ -63,6 +64,7 @@ export const TAG_GROUPS: TagGroup[] = [
       Tag.beach,
       Tag.park,
       Tag.forest,
+      Tag.graveyard,
       Tag.countryside,
       Tag.zoo
     ]
