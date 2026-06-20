@@ -35,7 +35,8 @@ export enum Location {
   perdanaBotanicalGardens = 'Perdana Botanical Gardens',
   aseanSculptureGarden = 'ASEAN Sculpture Garden',
   klccPark = "KLCC Park",
-  urbanOrchardPark = "Urban Orchard Park"
+  urbanOrchardPark = "Urban Orchard Park",
+  titiwangsaLakeGardens = "Titiwangsa Lake Gardens"
 }
 
 export const LOCATION_GROUPS: LocationGroup[] = [
@@ -65,7 +66,8 @@ export const LOCATION_GROUPS: LocationGroup[] = [
       Location.perdanaBotanicalGardens,
       Location.aseanSculptureGarden,
       Location.klccPark,
-      Location.urbanOrchardPark
+      Location.urbanOrchardPark,
+      Location.titiwangsaLakeGardens
     ]
   },
   {

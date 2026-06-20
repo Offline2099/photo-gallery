@@ -13177,7 +13177,7 @@
     "year": "2025",
     "month": "12",
     "index": "93",
-    "caption": "Dogs are wandering near a memorial pagoda at the Chinese graveyard in Kuala Lumpur. Merdeka 118 is visible in the dostance.",
+    "caption": "Dogs are wandering near a memorial pagoda at the Chinese graveyard in Kuala Lumpur. Merdeka 118 is visible in the distance.",
     "location": {
       "name": "Kuala Lumpur"
     },
@@ -13242,6 +13242,798 @@
       "city",
       "graveyard",
       "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "98",
+    "caption": "Petronas Twin Towers and other nearby skyscrapers are visible from a city street in Kuala Lumpur.",
+    "location": {
+      "name": "Kuala Lumpur"
+    },
+    "tags": [
+      "city",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "99",
+    "caption": "A small decorative tree at the entrance to the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "trees"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "100",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "101",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "102",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "103",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees",
+      "landmark",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "104",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers and Merdeka 118 are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "105",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "106",
+    "caption": "Ixora blooms on the lake bank at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "flowers",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "107",
+    "caption": "Heliconia grows at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "108",
+    "caption": "Bauhinia (orchid tree) blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "109",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "110",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers, KL Tower, and Merdeka 118 are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "111",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. Petronas Towers, KL Tower, and Merdeka 118 are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "112",
+    "caption": "A strange are installation on the lake bank at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "113",
+    "caption": "A strange art installation on the lake bank at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "114",
+    "caption": "Kuala Lumpur skyline is visible through the branches of a tree at the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "trees",
+      "waterbody",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "115",
+    "caption": "The central lake at the Titiwangsa Lake Gardens in Kuala Lumpur. KL Tower and Merdeka 118 are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "116",
+    "caption": "A lakeside pathway leads through the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "road",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "117",
+    "caption": "Flowers and palm trees grow at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "118",
+    "caption": "Canna lily blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "119",
+    "caption": "A lakeside pathway leads through the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "road",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "120",
+    "caption": "A small lake in the eastern part of the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "121",
+    "caption": "A small lake in the eastern part of the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "trees"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "122",
+    "caption": "A small lake in the eastern part of the Titiwangsa Lake Gardens, with Kuala Lumpur skyline in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "123",
+    "caption": "A small lake in the eastern part of the Titiwangsa Lake Gardens, with Kuala Lumpur skyline in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "124",
+    "caption": "A small lake in the eastern part of the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "125",
+    "caption": "A small lake in the eastern part of the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "flowers",
+      "trees"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "126",
+    "caption": "Decorative mushrooms near a small lake in the eastern part of the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "127",
+    "caption": "Decorative mushrooms and beautiful trees near a small lake in the eastern part of the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "128",
+    "caption": "Kuala Lumpur skyline is visible in the distance from the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "129",
+    "caption": "Kuala Lumpur skyline is visible in the distance from the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "130",
+    "caption": "Kuala Lumpur skyline is visible through the branches of trees at the Titiwangsa Lake Gardens.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "trees",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "131",
+    "caption": "A small playground at the Titiwangsa Lake Gardens. Petronas Towers are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "trees",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "132",
+    "caption": "A pond with fountains at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "133",
+    "caption": "Reeds grow in a small pond with fountains at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "134",
+    "caption": "Reeds grow in a small pond with fountains at the Titiwangsa Lake Gardens. Kuala Lumpur skyline is visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "135",
+    "caption": "Reeds grow in a small pond with fountains at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "fountain"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "136",
+    "caption": "A green lawn at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "trees",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "137",
+    "caption": "Red Plumeria blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "138",
+    "caption": "Allamanda blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "139",
+    "caption": "Gomphocarpus blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "140",
+    "caption": "Ixora blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "141",
+    "caption": "Allamanda blooms at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "142",
+    "caption": "A paved path leads through the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "flowers",
+      "road"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "143",
+    "caption": "A decorative butterfly at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "144",
+    "caption": "A peaceful cloudy day at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "145",
+    "caption": "An art installation at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "146",
+    "caption": "A strange masterpiece called Ring of Unity at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "147",
+    "caption": "A lawn with a playground at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "148",
+    "caption": "An alley at the Titiwangsa Lake Gardens in Kuala Lumpur. Merdeka 118 and KL Tower are visible in the distance.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "landmark"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "149",
+    "caption": "Reeds grow in the central lake at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody",
+      "trees"
+    ]
+  },
+  {
+    "year": "2025",
+    "month": "12",
+    "index": "150",
+    "caption": "Reeds grow in the central lake at the Titiwangsa Lake Gardens in Kuala Lumpur.",
+    "location": {
+      "name": "Titiwangsa Lake Gardens",
+      "areaName": "Kuala Lumpur"
+    },
+    "tags": [
+      "park",
+      "waterbody"
     ]
   }
 ]
