@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, inject, input, computed } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { RouteService } from '../../../services/route.service';
 
 @Component({
   selector: 'app-control-button',
@@ -10,6 +11,8 @@ import { NgClass } from '@angular/common';
 })
 export class ControlButtonComponent {
 
+  private routes = inject(RouteService);
+
   hasSwitch = input<boolean>(false);
   isSwitchOn = input<boolean>(false);
   icon = input<string>('');
@@ -19,5 +22,8 @@ export class ControlButtonComponent {
   textAfter = input<string>('');
   label = input<string>('');
   isSelected = input<boolean>(false);
+
+  iconSrc = computed(() => this.routes.iconRoute(this.icon()));
+  secondIconSrc = computed(() => this.routes.iconRoute(this.secondIcon()));
 
 }

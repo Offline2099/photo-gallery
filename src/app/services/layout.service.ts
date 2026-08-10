@@ -1,31 +1,43 @@
-import { computed, Injectable, Signal } from '@angular/core';
-import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
-import { map, Observable } from 'rxjs';
-import { BREAKPOINTS, ScreenWidth } from '../constants/screen-width';
+import { Service, Signal, inject, computed } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { map } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-@Injectable({
-  providedIn: 'root'
-})
+enum Layout {
+  mobile,
+  tablet,
+  desktopSmall,
+  desktopAverage,
+  desktopWide
+}
+
+const BREAKPOINTS: Record<Layout, string> = {
+  [Layout.mobile]: '(max-width: 599px)',
+  [Layout.tablet]: '(min-width: 600px) and (max-width: 991px)',
+  [Layout.desktopSmall]: '(min-width: 992px) and (max-width: 1199px)',
+  [Layout.desktopAverage]: '(min-width: 1200px) and (max-width: 1599px)',
+  [Layout.desktopWide]: '(min-width: 1600px)'
+};
+
+@Service()
 export class LayoutService {
 
-  screenWidth: Signal<ScreenWidth>;
-  isDesktop: Signal<boolean>;
+  private observer = inject(BreakpointObserver);
 
-  constructor(private observer: BreakpointObserver) {
-    const screenWidth: Observable<ScreenWidth> = this.observer.observe(Object.values(BREAKPOINTS)).pipe(
-      map(breakpointState => this.getScreenWidthStatus(breakpointState))
-    );
-    this.screenWidth = toSignal(screenWidth, { requireSync: true });
-    this.isDesktop = computed(() => 
-      this.screenWidth() !== ScreenWidth.mobile && this.screenWidth() !== ScreenWidth.tablet
-    );
-  }
+  isMobile: Signal<boolean> = this.observe(BREAKPOINTS[Layout.mobile]);
+  isTablet: Signal<boolean> = this.observe(BREAKPOINTS[Layout.tablet]);
+  isDesktopSmall: Signal<boolean> = this.observe(BREAKPOINTS[Layout.desktopSmall]);
+  isDesktopAverage: Signal<boolean> = this.observe(BREAKPOINTS[Layout.desktopAverage]);
+  isDesktopWide: Signal<boolean> = this.observe(BREAKPOINTS[Layout.desktopWide]);
+  isDesktop = computed<boolean>(
+    () => this.isDesktopSmall() || this.isDesktopAverage() || this.isDesktopWide()
+  );
 
-  private getScreenWidthStatus(breakpointState: BreakpointState): ScreenWidth {
-    return Number(
-      Object.entries(BREAKPOINTS).find(([_, value]) => breakpointState.breakpoints[value])![0]
-    ) as ScreenWidth;
+  private observe(feature: string): Signal<boolean> {
+    return toSignal(
+      this.observer.observe(feature).pipe(map(state => state.matches)),
+      { requireSync: true }
+    );
   }
 
 }

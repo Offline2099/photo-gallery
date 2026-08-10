@@ -34,9 +34,9 @@ export enum Location {
   kualaLumpur = 'Kuala Lumpur',
   perdanaBotanicalGardens = 'Perdana Botanical Gardens',
   aseanSculptureGarden = 'ASEAN Sculpture Garden',
-  klccPark = "KLCC Park",
-  urbanOrchardPark = "Urban Orchard Park",
-  titiwangsaLakeGardens = "Titiwangsa Lake Gardens"
+  klccPark = 'KLCC Park',
+  urbanOrchardPark = 'Urban Orchard Park',
+  titiwangsaLakeGardens = 'Titiwangsa Lake Gardens'
 }
 
 export const LOCATION_GROUPS: LocationGroup[] = [

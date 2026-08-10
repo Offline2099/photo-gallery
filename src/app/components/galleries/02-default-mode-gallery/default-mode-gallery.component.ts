@@ -1,6 +1,7 @@
-import { Component, input, model } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, inject, input, model } from '@angular/core';
 import { timer } from 'rxjs';
+// Constants & Enums
+import { IMAGE_SMALL_PATH } from '../../../constants/paths';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
@@ -11,22 +12,24 @@ import { GalleryPanelComponent } from '../04-gallery-panel/gallery-panel.compone
 import { SettingsService } from '../../../services/settings.service';
 
 const NONE_SELECTED: number = -1;
-const MOUSEOVER_SELECT_DELAY: number = 300;
+const MOUSEOVER_SELECT_DELAY_MS: number = 300;
 
 @Component({
   selector: 'app-default-mode-gallery',
-  imports: [NgClass, SelectedImageComponent, GalleryPanelComponent],
+  imports: [SelectedImageComponent, GalleryPanelComponent],
   templateUrl: './default-mode-gallery.component.html',
   styleUrl: './default-mode-gallery.component.scss'
 })
 export class DefaultModeGalleryComponent {
 
+  readonly IMAGE_SMALL_PATH = IMAGE_SMALL_PATH;
+
+  private settings = inject(SettingsService);
+
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
   mouseoverIndex: number = NONE_SELECTED;
-
-  constructor(private settings: SettingsService) {}
 
   selectImage(image: ImageData): void {
     this.selectedImage.set(image);
@@ -35,8 +38,8 @@ export class DefaultModeGalleryComponent {
   mouseoverImageSelect(index: number): void {
     if (!this.settings.isMouseoverSelectAllowed()) return;
     this.mouseoverIndex = index;
-    timer(MOUSEOVER_SELECT_DELAY).subscribe(() => {
-      if (this.mouseoverIndex == index && this.settings.isMouseoverSelectAllowed()) 
+    timer(MOUSEOVER_SELECT_DELAY_MS).subscribe(() => {
+      if (this.mouseoverIndex === index && this.settings.isMouseoverSelectAllowed())
         this.selectImage(this.gallery().images[index]);
     });
   }

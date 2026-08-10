@@ -1,10 +1,5 @@
-import { ImageDataTab } from '../types/ui/image-data-tab.interface';
-
-export enum ImageDataTabId {
-  time,
-  location,
-  tags
-}
+import { ImageDataTab } from '../../types/ui/image-data-tab.interface';
+import { ImageDataTabId } from './image-data-tab-id.enum';
 
 export const IMAGE_DATA_TABS: ImageDataTab[] = [
   {

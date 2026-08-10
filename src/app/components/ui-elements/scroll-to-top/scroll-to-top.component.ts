@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-scroll-to-top',
-  host: { 
+  host: {
     '[class.invisible]': 'verticalOffset < 250',
     '(window:scroll)': 'onScroll()',
     '(click)': 'onClick()'
@@ -14,12 +14,12 @@ import { ViewportScroller } from '@angular/common';
 })
 export class ScrollToTopComponent {
 
+  private scroller = inject(ViewportScroller);
   verticalOffset: number = 0;
 
-  constructor(private scroller: ViewportScroller) {}
-
   onScroll(): void {
-    this.verticalOffset = this.scroller.getScrollPosition()[1];
+    const [_, y]: number[] = this.scroller.getScrollPosition();
+    this.verticalOffset = y;
   }
 
   onClick(): void {

@@ -1,10 +1,11 @@
-import { Component, Signal, input, computed } from '@angular/core';
+import { Component, Signal, inject, input, computed, linkedSignal } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Constants & Enums
-import { ScreenWidth } from '../../../constants/screen-width';
-import { NAVIGATION_TABS, NavigationTabId } from '../../../constants/navigation-tabs';
+import { NavigationTabId } from '../../../constants/navigation-tabs/navigation-tab-id.enum';
+import { NAVIGATION_TABS } from '../../../constants/navigation-tabs/navigation-tabs';
 // Interfaces
+import { NavigationTab } from '../../../types/ui/navigation-tab.interface';
 import { NavigationTabData } from '../../../types/ui/navigation-tab-data.interface';
 import { DefaultGalleries } from '../../../types/galleries/default-galleries.interface';
 import { GalleryGroup } from '../../../types/galleries/gallery-group.interface';
@@ -17,7 +18,7 @@ import { RouteService } from '../../../services/route.service';
 
 const DEFAULT_TAB_INDEX = 0;
 
-type CollapsedState = Record<NavigationTabId, Record<string, boolean>>;
+type VisualState = Record<NavigationTabId, Record<string, boolean>>;
 
 @Component({
   selector: 'app-navigation-area',
@@ -27,37 +28,35 @@ type CollapsedState = Record<NavigationTabId, Record<string, boolean>>;
 })
 export class NavigationAreaComponent {
 
-  readonly ScreenWidth = ScreenWidth;
+  private router = inject(Router);
+  private layout = inject(LayoutService);
+  private routes = inject(RouteService);
 
   galleries = input.required<DefaultGalleries | null>();
 
-  tabs: NavigationTabData[];
-  selectedTab: NavigationTabData;
+  tabs = computed<NavigationTabData[]>(() => this.addTabData(NAVIGATION_TABS, this.galleries()));
+  selectedTab = linkedSignal<NavigationTabData>(() => this.tabs()[DEFAULT_TAB_INDEX]);
 
-  width: Signal<ScreenWidth>;
-  isCollapsed = computed<CollapsedState>(() => 
-    this.initialVisualState(this.tabs)
-  );
+  isCollapsed = computed<VisualState>(() => this.initialVisualState(this.tabs()));
 
-  constructor(private router: Router, private routes: RouteService, private layout: LayoutService) {
-    this.width = this.layout.screenWidth;
-    this.tabs = this.fillTabsWithData();
-    this.selectedTab = this.tabs[DEFAULT_TAB_INDEX];
+  isDesktop: Signal<boolean> = this.layout.isDesktop;
+  isTablet: Signal<boolean> = this.layout.isTablet;
+  isMobile: Signal<boolean> = this.layout.isMobile;
+
+  constructor() {
     this.router.events.pipe(takeUntilDestroyed()).subscribe(event => {
       if (event instanceof ActivationEnd) this.setTabByURL(this.router.url);
     });
   }
 
-  fillTabsWithData(): NavigationTabData[] {
-    return NAVIGATION_TABS.map(tab => ({
+  addTabData(tabs: NavigationTab[], galleries: DefaultGalleries | null): NavigationTabData[] {
+    return tabs.map(tab => ({
       ...tab,
-      galleryGroups: computed<GalleryGroup[]>(() => 
-        this.galleries() !== null ? this.galleryGroupsForTab(tab.id, this.galleries()!) : []
-      )
+      galleryGroups: galleries !== null ? this.galleryGroupsByTabId(tab.id, galleries) : []
     }));
   }
 
-  galleryGroupsForTab(id: NavigationTabId, galleries: DefaultGalleries): GalleryGroup[] {
+  galleryGroupsByTabId(id: NavigationTabId, galleries: DefaultGalleries): GalleryGroup[] {
     switch (id) {
       case NavigationTabId.years:
         return galleries.byMonth;
@@ -68,26 +67,29 @@ export class NavigationAreaComponent {
     }
   }
 
-  initialVisualState(tabs: NavigationTabData[]): CollapsedState {
+  initialVisualState(tabs: NavigationTabData[]): VisualState {
     return tabs.reduce((accTab, tab) => {
-      accTab[tab.id] = tab.galleryGroups().reduce((accGroup, group) => {
-        accGroup[group.id] = true;
-        return accGroup;
-      }, {} as Record<string, boolean>);
+      accTab[tab.id] = tab.galleryGroups.reduce((accGroup, group) => {
+          accGroup[group.id] = true;
+          return accGroup;
+        }, {} as Record<string, boolean>
+      );
       return accTab;
-    }, {} as CollapsedState);
+    }, {} as VisualState);
   }
 
   setTabByURL(url: string): void {
-    this.selectedTab = this.routes.isLocationRoute(url)
-      ? this.tabs.find(tab => tab.id === NavigationTabId.places)!
+    const index: number = this.routes.isLocationRoute(url)
+      ? this.tabs().findIndex(tab => tab.id === NavigationTabId.places)
       : this.routes.isTagRoute(url)
-        ? this.tabs.find(tab => tab.id === NavigationTabId.tags)!
-        : this.tabs[DEFAULT_TAB_INDEX];
+        ? this.tabs().findIndex(tab => tab.id === NavigationTabId.tags)
+        : DEFAULT_TAB_INDEX;
+    this.selectTabByIndex(index);
   }
 
-  selectTab(tab: NavigationTabData): void {
-    this.selectedTab = tab;
+  selectTabByIndex(index: number): void {
+    const newIndex = index >= 0 && index < this.tabs().length ? index : DEFAULT_TAB_INDEX;
+    this.selectedTab.set(this.tabs()[newIndex]);
   }
 
 }

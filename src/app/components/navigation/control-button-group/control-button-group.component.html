@@ -1,16 +1,16 @@
 <!-- Group Header -->
 <div class="group-header" (click)="toggleGroup()">
-  @if (!isDesktop()) {
-    <span class="triangle">&#9654;</span>
-    <span>{{group().name}}</span>
-    <span class="label">{{label()}}</span>
-  } @else {
+  @if (isDesktop()) {
     @if (group().path) {
-      <a [routerLink]="group().path">{{group().name}}</a>
+      <a [routerLink]="group().path">{{ group().name }}</a>
     } @else {
-      <span>{{group().name}}</span>
+      <span>{{ group().name }}</span>
     }
-  }  
+  } @else {
+    <span class="triangle">&#9654;</span>
+    <span>{{ group().name }}</span>
+    <span class="label">{{ label() }}</span>
+  }
 </div>
 
 <!-- Group Body -->
@@ -21,7 +21,7 @@
         class="no-margin"
         routerLinkActive="selected"
         [text]="gallery.name.short"
-        label="{{gallery.images.length}}"
+        [label]="gallery.images.length.toString()"
       />
     </a>
   }

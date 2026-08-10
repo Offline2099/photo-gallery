@@ -1,7 +1,6 @@
-import { Signal } from '@angular/core';
-import { GalleryGroup } from '../galleries/gallery-group.interface';
 import { NavigationTab } from './navigation-tab.interface';
+import { GalleryGroup } from '../galleries/gallery-group.interface';
 
 export interface NavigationTabData extends NavigationTab {
-  galleryGroups: Signal<GalleryGroup[]>;
+  galleryGroups: GalleryGroup[];
 }

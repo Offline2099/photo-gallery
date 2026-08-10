@@ -5,25 +5,25 @@
   <app-control-button
     class="accent-text image-change-button"
     text="&#9664;"
-    textAfter="{{previousIndex()}}"
+    [textAfter]="previousIndex().toString()"
     (click)="selectPreviousImage()"
   />
 
   <!-- Name -->
   <div class="image-name">
     @if (isOverlay() && !isDesktopSmall()) {
-      <span>{{gallery().name.full}} &#9656; </span>
+      <span>{{ gallery().name.full }} &#9656; </span>
     }
-    <span>Image {{imageIndex()}}</span>
+    <span>Image {{ imageIndex() }}</span>
   </div>
-  
+
   <div class="button-wrapper">
 
     <!-- Full Size Button -->
-    <a href="./img/{{image().path}}" target="_blank">
+    <a [href]="imagePath()" target="_blank">
       <app-control-button
         class="no-margin"
-        icon="new-tab-icon.webp"
+        icon="new-tab-icon"
         text="Full Size"
         [label]="isDesktopSmall() ? '' : '3840&hairsp;x&hairsp;2160'"
       />
@@ -32,18 +32,19 @@
     <!-- Download Button -->
     <app-control-button
       class="no-margin"
-      icon="download-icon.webp"
+      icon="download-icon"
       text="Download"
-      (click)="downloadImage('img/' + image().path)"
+      (click)="downloadImage(imagePath())"
     />
 
     <!-- Next Image Button -->
     <app-control-button
       class="accent-text image-change-button button-content-right"
       text="&#9654;"
-      textBefore="{{nextIndex()}}"
+      [textBefore]="nextIndex().toString()"
       (click)="selectNextImage()"
     />
+
   </div>
 
 </div>
@@ -51,15 +52,12 @@
 <!-- Image -->
 <div class="image-container">
   @if (isLoading) {
-    <img class="cogwheel" src="./ui/cogwheel.svg" alt="" />
+    <img class="cogwheel" src="ui/cogwheel.svg" alt="" />
   }
-  <img 
+  <img
     class="image-selected"
-    [ngClass]="{
-      'image-loading': isLoading,
-      'overlay': isOverlay()
-    }"
-    src="./img/{{image().path}}"
+    [ngClass]="{ 'image-loading': isLoading, 'overlay': isOverlay() }"
+    [src]="imagePath()"
     [alt]="imageName()"
     (load)="onImageLoad()"
     (click)="toggleOverlay()"

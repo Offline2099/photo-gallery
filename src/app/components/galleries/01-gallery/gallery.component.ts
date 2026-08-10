@@ -1,6 +1,9 @@
-import { Component, ElementRef, computed, effect, viewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { clearAllBodyScrollLocks, disableBodyScroll } from 'body-scroll-lock';
+import { Component, ElementRef, inject, computed, effect, viewChild } from '@angular/core';
+import { Router, ActivatedRoute, ActivationEnd } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+// Constants & Enums
+import { IMAGE_PATH } from '../../../constants/paths';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
@@ -16,58 +19,71 @@ import { SettingsService } from '../../../services/settings.service';
 
 @Component({
   selector: 'app-gallery',
-  imports: [DefaultModeGalleryComponent, GridModeGalleryComponent, SelectedImageComponent, ScrollToTopComponent],
+  imports: [
+    DefaultModeGalleryComponent,
+    GridModeGalleryComponent,
+    SelectedImageComponent,
+    ScrollToTopComponent
+  ],
   templateUrl: './gallery.component.html',
   styleUrl: './gallery.component.scss'
 })
 export class GalleryComponent {
 
-  gallery!: Gallery;
-  selectedImage: ImageData | null = null;
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);  
+  private data = inject(DataService);
+  private layout = inject(LayoutService);
+  private settings = inject(SettingsService);
 
-  isDefaultMode = computed<boolean>(() => this.isDefaultGalleryMode(this.gallery));
-  isOverlayVisible = computed<boolean>(() => this.layout.isDesktop() && this.settings.isOverlayVisible());
+  gallery: Gallery = this.route.snapshot.data['gallery'];
+  selectedImage: ImageData | null = this.gallery.images[0] || null;
+
+  isDefaultMode = computed<boolean>(() =>
+    this.isDefaultGalleryMode(this.gallery, this.layout.isDesktop())
+  );
+  isOverlayVisible = computed<boolean>(
+    () => this.layout.isDesktop() && this.settings.isOverlayVisible()
+  );
 
   scrollTarget = viewChild<ElementRef>('scrollTarget');
 
-  constructor(
-    private route: ActivatedRoute,
-    private data: DataService,
-    private layout: LayoutService,
-    private settings: SettingsService
-  ) {
-    this.gallery = this.route.snapshot.data['gallery'];
-    this.selectedImage = this.gallery.images[0] || null;
-    if (this.settings.isOverlayVisible()) this.settings.toggleOverlay();
+  constructor() {
+    this.router.events.pipe(takeUntilDestroyed()).subscribe(event => {
+      if (event instanceof ActivationEnd && this.settings.isOverlayVisible())
+        this.settings.toggleOverlay();
+    });
     effect(() => {
       if (this.isOverlayVisible()) {
         if (this.scrollTarget())
           disableBodyScroll(this.scrollTarget()?.nativeElement, { reserveScrollBarGap: true });
-      }
-      else clearAllBodyScrollLocks();
+      } else clearAllBodyScrollLocks();
     });
   }
 
   ngAfterViewInit(): void {
-    this.preloadImages(this.gallery);
+    if (this.layout.isDesktop()) this.preloadImages(this.gallery);
   }
 
-  isDefaultGalleryMode(gallery: Gallery): boolean {
-    return this.layout.isDesktop() && 
-      this.data.isChronological(gallery)
-        ? this.settings.isDefaultModeByTime()
-        : this.settings.isDefaultModeByData();
+  isDefaultGalleryMode(gallery: Gallery, isDesktop: boolean): boolean {
+    return isDesktop && this.data.isChronological(gallery)
+      ? this.settings.isDefaultModeByTime()
+      : this.settings.isDefaultModeByData();
   }
 
   preloadImages(gallery: Gallery): void {
     if (!gallery.images.length) return;
     const preload = (index: number) => {
-      const img = new Image();
-      img.src = `./img/${gallery.images[index].path}`;
+      const img: HTMLImageElement = new Image();
+      img.src = `${IMAGE_PATH}/${gallery.images[index].path})`;
       if (index === gallery.images.length - 1) return;
-      img.onload = () => { preload(index + 1) }
-      img.onerror = () => { preload(index + 1) }
-    }
+      img.onload = () => {
+        preload(index + 1);
+      };
+      img.onerror = () => {
+        preload(index + 1);
+      };
+    };
     preload(0);
   }
 

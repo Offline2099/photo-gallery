@@ -1,8 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Service, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class SettingsService {
 
   isDefaultModeByTime = signal<boolean>(true);
@@ -13,7 +11,7 @@ export class SettingsService {
 
   isMouseoverSelectAllowed = signal<boolean>(false);
   showImageInfo = signal<boolean>(true);
-  
+
   imagesInRow = signal<number>(3);
   showImageCaptions = signal<boolean>(true);
   showImageData = signal<boolean>(false);

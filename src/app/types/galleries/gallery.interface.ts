@@ -6,7 +6,7 @@ export interface Gallery {
   name: {
     short: string;
     full: string;
-  }
+  };
   path: string;
   images: ImageData[];
 }

@@ -1,5 +1,5 @@
-<!-- Selected Image Block --> 
-<app-selected-image [gallery]="gallery()" [(image)]="selectedImage"/>
+<!-- Selected Image Block -->
+<app-selected-image [gallery]="gallery()" [(image)]="selectedImage" />
 
 <!-- Gallery Settings and Image Thumbnails -->
 <div class="side-container">
@@ -10,29 +10,32 @@
   <!-- Image Thumbnails -->
   <div class="thumbnails">
     @for (image of gallery().images; track $index) {
-      <div 
+      <div
         class="thumbnail-container"
         (click)="selectImage(image)"
         (mouseenter)="mouseoverImageSelect($index)"
         (mouseleave)="cancelMouseoverSelect()"
-        (contextmenu)="$event.preventDefault()">
-
+        (contextmenu)="$event.preventDefault()"
+      >
         <!-- Image -->
-        <img class="thumbnail" src="./img/small/{{image.path}}" alt="Image {{$index + 1}}" />
+        <img
+          class="thumbnail"
+          src="{{ IMAGE_SMALL_PATH }}/{{ image.path }}"
+          alt="Image {{ $index + 1 }}"
+        />
 
         <!-- Decorative Overlay -->
         @for (corner of ['top-left', 'top-right', 'bottom-right', 'bottom-left']; track $index) {
-          <div class="thumbnail-overlay {{corner}}"></div>
+          <div class="thumbnail-overlay {{ corner }}"></div>
         }
 
         <!-- Image Number -->
-        <div class="thumbnail-number" [ngClass]="{'selected': image === selectedImage()}">
-          <span>{{$index + 1}}</span>
+        <div class="thumbnail-number" [class.selected]="image === selectedImage()">
+          <span>{{ $index + 1 }}</span>
         </div>
 
       </div>
     }
-    
   </div>
 
-</div> 
+</div>

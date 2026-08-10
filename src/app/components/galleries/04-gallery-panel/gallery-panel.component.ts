@@ -1,7 +1,6 @@
-import { Component, Signal, input, computed } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, Signal, inject, input, computed } from '@angular/core';
 // Constants & Enums
-import { ScreenWidth } from '../../../constants/screen-width';
+import { MAX_IMAGES_IN_ROW, MAX_IMAGES_IN_ROW_IF_NOT_WIDE } from '../../../constants/settings';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 // Components
@@ -13,46 +12,44 @@ import { SettingsService } from '../../../services/settings.service';
 
 @Component({
   selector: 'app-gallery-panel',
-  imports: [NgClass, ControlButtonComponent],
+  imports: [ControlButtonComponent],
   templateUrl: './gallery-panel.component.html',
   styleUrl: './gallery-panel.component.scss'
 })
 export class GalleryPanelComponent {
 
+  private data = inject(DataService);
+  private layout = inject(LayoutService);
+  private settings = inject(SettingsService);
+
   gallery = input.required<Gallery>();
   isDefaultMode = input.required<boolean>();
 
-  displayedName = computed<string>(() => this.displayedGalleryName(this.isDefaultMode(), this.gallery()));
-
-  isDesktop: Signal<boolean>;
-
-  isPanelVisible: Signal<boolean>;
-  isMouseoverSelectAllowed: Signal<boolean>;
-  showImageInfo: Signal<boolean>;
-  imagesInRow: Signal<number>;
-  showImageCaptions: Signal<boolean>;
-  showImageData: Signal<boolean>;
-  showImageTags: Signal<boolean>;
-
-  maxImagesInRow = computed<number>(() => 
-    this.layout.screenWidth() === ScreenWidth.desktopWide ? 4 : 3
+  displayedName = computed<string>(() =>
+    this.displayedGalleryName(this.gallery(), this.isDefaultMode())
   );
 
-  constructor(private data: DataService, private layout: LayoutService, private settings: SettingsService) {
-    this.isDesktop = this.layout.isDesktop;
-    this.isPanelVisible = this.settings.isPanelVisible;
-    this.isMouseoverSelectAllowed = this.settings.isMouseoverSelectAllowed;
-    this.showImageInfo = this.settings.showImageInfo;
-    this.imagesInRow = this.settings.imagesInRow;
-    this.showImageCaptions = this.settings.showImageCaptions;
-    this.showImageData = this.settings.showImageData;
-    this.showImageTags = this.settings.showImageTags;
+  isDesktop: Signal<boolean> = this.layout.isDesktop;
+  maxImagesInRow = computed<number>(() => this.getMaxImagesInRow(this.layout.isDesktopWide()));
+
+  isPanelVisible: Signal<boolean> = this.settings.isPanelVisible;
+  isMouseoverSelectAllowed: Signal<boolean> = this.settings.isMouseoverSelectAllowed;
+  showImageInfo: Signal<boolean> = this.settings.showImageInfo;
+  imagesInRow: Signal<number> = this.settings.imagesInRow;
+  showImageCaptions: Signal<boolean> = this.settings.showImageCaptions;
+  showImageData: Signal<boolean> = this.settings.showImageData;
+  showImageTags: Signal<boolean> = this.settings.showImageTags;
+
+  displayedGalleryName(gallery: Gallery, isDefaultMode: boolean): string {
+    return isDefaultMode
+      ? this.data.isChronological(gallery)
+        ? gallery.name.full
+        : gallery.name.short
+      : gallery.name.full;
   }
 
-  displayedGalleryName(isDefaultMode: boolean, gallery: Gallery): string {
-    return isDefaultMode
-      ? this.data.isChronological(gallery) ? gallery.name.full : gallery.name.short
-      : gallery.name.full;
+  getMaxImagesInRow(isDesktopWide: boolean): number {
+    return isDesktopWide ? MAX_IMAGES_IN_ROW : MAX_IMAGES_IN_ROW_IF_NOT_WIDE;
   }
 
   toggleSettingsPanel(): void {

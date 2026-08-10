@@ -1,22 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { ICON_PATH, LOCATIONS_PATH, TAGS_PATH } from '../constants/paths';
 import { Gallery } from '../types/galleries/gallery.interface';
+import { GalleryGroup } from '../types/galleries/gallery-group.interface';
 import { DefaultGalleries } from '../types/galleries/default-galleries.interface';
 import { GalleryComponent } from '../components/galleries/01-gallery/gallery.component';
-import { GalleryGroup } from '../types/galleries/gallery-group.interface';
 import { UtilityService } from './utility.service';
 
-const LOCATIONS_PATH: string = 'places';
-const TAGS_PATH: string = 'tags';
-
-@Injectable({
-  providedIn: 'root'
-})
+@Service()
 export class RouteService {
 
-  private areRoutesConstructed: boolean = false;
+  private router = inject(Router);
+  private utility = inject(UtilityService);
 
-  constructor(private router: Router, private utility: UtilityService) {}
+  private areRoutesConstructed: boolean = false;
 
   constructDynamicRoutes(galleries: DefaultGalleries): void {
     if (this.areRoutesConstructed) return;
@@ -24,12 +21,17 @@ export class RouteService {
     this.areRoutesConstructed = true;
   }
 
-  imageRoute(year: number, month: number, index: number): string {
-    return `${year}/${this.utility.addLeadingZeroes(month)}/${index}.webp`;
+  iconRoute(iconName: string): string {
+    if (!iconName) return '';
+    return `${ICON_PATH}/${iconName}.webp`;
+  }
+
+  imagePath(year: number, month: number, index: number): string {
+    return `${year}/${String(month).padStart(2, '0')}/${index}.webp`;
   }
 
   monthRoute(year: string, month: string): string {
-    return `${year}/${this.utility.addLeadingZeroes(Number(month))}`;
+    return `${year}/${month.padStart(2, '0')}`;
   }
 
   locationRoute(location: string): string {

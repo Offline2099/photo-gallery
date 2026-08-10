@@ -1,32 +1,30 @@
 <!-- Switch -->
 @if (hasSwitch()) {
-  <div 
-    class="switch"
-    [ngClass]="{'on': isSwitchOn(), 'off': !isSwitchOn() }">
+  <div class="switch" [ngClass]="{ 'on': isSwitchOn(), 'off': !isSwitchOn() }">
     <div class="ball"></div>
   </div>
 }
 
 <!-- Icons -->
 @if (icon()) {
-  <img class="icon" src="./ui/{{icon()}}" alt="" />
+  <img class="icon" [src]="iconSrc()" alt="" />
 }
 @if (secondIcon()) {
-  <img class="icon" src="./ui/{{secondIcon()}}" alt="" />
+  <img class="icon" [src]="secondIconSrc()" alt="" />
 }
 
 <!-- Text -->
 @if (textBefore()) {
-  <span class="text-before">{{textBefore()}}</span>
+  <span class="text-before">{{ textBefore() }}</span>
 }
 @if (text()) {
-  <span class="text">{{text()}}</span>
+  <span class="text">{{ text() }}</span>
 }
 @if (textAfter()) {
-  <span class="text-after">{{textAfter()}}</span>
+  <span class="text-after">{{ textAfter() }}</span>
 }
 
 <!-- Label -->
 @if (label()) {
-  <span class="label">({{label()}})</span>
+  <span class="label">({{ label() }})</span>
 }

@@ -6,11 +6,11 @@
   <div class="gallery-block">
 
     <!-- Image -->
-    <img 
+    <img
       class="gallery-image"
-      [ngClass]="{'unclickable': !isClickAllowed()}"
-      src="./img/{{isSmallImage() ? 'small/' : ''}}{{image.path}}"
-      alt="{{gallery().name.full}} - Image {{$index}}"
+      [class.unclickable]="!isOverlayAllowed()"
+      src="{{ areImagesSmall() ? IMAGE_SMALL_PATH : IMAGE_PATH }}/{{ image.path }}"
+      alt="{{ gallery().name.full }} - Image {{ $index + 1 }}"
       (click)="toggleOverlay(image)"
       (contextmenu)="$event.preventDefault()"
     />

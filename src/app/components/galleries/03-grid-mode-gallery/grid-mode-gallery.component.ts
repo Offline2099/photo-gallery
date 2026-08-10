@@ -1,7 +1,10 @@
-import { Component, Signal, input, model, computed, effect } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, Signal, inject, input, model, computed, effect } from '@angular/core';
 // Constants & Enums
-import { ScreenWidth } from '../../../constants/screen-width';
+import { IMAGE_PATH, IMAGE_SMALL_PATH } from '../../../constants/paths';
+import {
+  MAX_IMAGES_IN_ROW_IF_NOT_WIDE,
+  MAX_LARGE_IMAGES_IN_ROW
+} from '../../../constants/settings';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
 import { ImageData } from '../../../types/galleries/image-data.interface';
@@ -15,36 +18,61 @@ import { SettingsService } from '../../../services/settings.service';
 @Component({
   selector: 'app-grid-mode-gallery',
   host: { '[class]': 'galleryClass()' },
-  imports: [NgClass, GalleryPanelComponent, ImageDataComponent],
+  imports: [GalleryPanelComponent, ImageDataComponent],
   templateUrl: './grid-mode-gallery.component.html',
   styleUrl: './grid-mode-gallery.component.scss'
 })
 export class GridModeGalleryComponent {
 
+  readonly IMAGE_PATH = IMAGE_PATH;
+  readonly IMAGE_SMALL_PATH = IMAGE_SMALL_PATH;
+
+  private layout = inject(LayoutService);
+  private settings = inject(SettingsService);
+
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
-  imagesInRow: Signal<number>;
+  imagesInRow: Signal<number> = this.settings.imagesInRow;
 
-  galleryClass = computed<string>(() => `grid-${this.imagesInRow()}` + (this.layout.isDesktop() ? ' desktop' : ''));
-  isSmallImage = computed<boolean>(() => !this.layout.isDesktop() || this.imagesInRow() > 2)
-  isClickAllowed = computed<boolean>(() => this.layout.isDesktop() && this.imagesInRow() !== 1);
-  isAnyDataVisible = computed<boolean>(() => 
-    this.settings.showImageCaptions() || this.settings.showImageData() || this.settings.showImageTags()
+  galleryClass = computed<string>(() =>
+    this.constructGalleryClass(this.imagesInRow(), this.layout.isDesktop())
+  );
+  areImagesSmall = computed<boolean>(() =>
+    this.shouldImagesBeSmall(this.imagesInRow(), this.layout.isDesktop())
+  );
+  isOverlayAllowed = computed<boolean>(() =>
+    this.shouldOverlayBeAllowed(this.imagesInRow(), this.layout.isDesktop())
+  );
+  isAnyDataVisible = computed<boolean>(() =>
+    this.settings.showImageCaptions() ||
+    this.settings.showImageData() ||
+    this.settings.showImageTags()
   );
 
-  constructor(private layout: LayoutService, private settings: SettingsService) {
-    this.imagesInRow = this.settings.imagesInRow;
-    effect(() => this.adjustImagesInRow(this.imagesInRow(), this.layout.screenWidth()));
+  constructor() {
+    effect(() => this.adjustImagesInRow(this.imagesInRow()));
   }
 
-  adjustImagesInRow(imagesInRow: number, screenWidth: ScreenWidth): void {
-    if (imagesInRow > 3 && screenWidth !== ScreenWidth.desktopWide)
-      this.settings.setImagesInRow(3);
+  constructGalleryClass(imagesInRow: number, isDesktop: boolean): string {
+    return `grid-${imagesInRow}` + (isDesktop ? ' desktop' : '');
+  }
+
+  shouldImagesBeSmall(imagesInRow: number, isDesktop: boolean): boolean {
+    return !isDesktop || imagesInRow > MAX_LARGE_IMAGES_IN_ROW;
+  }
+
+  shouldOverlayBeAllowed(imagesInRow: number, isDesktop: boolean): boolean {
+    return isDesktop && imagesInRow !== 1;
+  }
+
+  adjustImagesInRow(imagesInRow: number): void {
+    if (imagesInRow > MAX_IMAGES_IN_ROW_IF_NOT_WIDE && !this.layout.isDesktopWide())
+      this.settings.setImagesInRow(MAX_IMAGES_IN_ROW_IF_NOT_WIDE);
   }
 
   toggleOverlay(image: ImageData): void {
-    if (!this.isClickAllowed()) return;
+    if (!this.isOverlayAllowed()) return;
     this.selectedImage.set(image);
     this.settings.toggleOverlay();
   }

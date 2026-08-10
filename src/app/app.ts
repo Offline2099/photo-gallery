@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { DefaultGalleries } from './types/galleries/default-galleries.interface';
 import { NavigationAreaComponent } from './components/navigation/navigation-area/navigation-area.component';
@@ -11,11 +11,8 @@ import { DataService } from './services/data.service';
   styleUrl: './app.scss'
 })
 export class App {
-  
-  readonly galleries: DefaultGalleries | null;
 
-  constructor(private data: DataService) {
-    this.galleries = this.data.galleries;
-  }
+  private data = inject(DataService);
+  readonly galleries: DefaultGalleries | null = this.data.galleries;
 
 }

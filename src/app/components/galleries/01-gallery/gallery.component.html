@@ -1,10 +1,10 @@
-@if (gallery.images.length) {
+@if (gallery.images.length && selectedImage) {
 
   <!-- Gallery -->
   @if (isDefaultMode()) {
-    <app-default-mode-gallery [gallery]="gallery" [(selectedImage)]="selectedImage!" />
+    <app-default-mode-gallery [gallery]="gallery" [(selectedImage)]="selectedImage" />
   } @else {
-    <app-grid-mode-gallery [gallery]="gallery" [(selectedImage)]="selectedImage!" />
+    <app-grid-mode-gallery [gallery]="gallery" [(selectedImage)]="selectedImage" />
   }
 
   <!-- Overlay -->
@@ -18,7 +18,7 @@
       />
     </div>
   }
-  
+
   <!-- Scroll-to-Top Button -->
   <app-scroll-to-top />
 
@@ -28,4 +28,5 @@
   <div class="placeholder">
     <div class="placeholder-text">Nothing to Display</div>
   </div>
+
 }

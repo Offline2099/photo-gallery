@@ -1,7 +1,7 @@
-import { Component, Signal, input, model, computed, effect } from '@angular/core';
+import { Component, Signal, inject, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
 // Constants & Enums
-import { ScreenWidth } from '../../../constants/screen-width';
+import { IMAGE_PATH } from '../../../constants/paths';
 import { GalleryType } from '../../../constants/gallery-type.enum';
 // Interfaces
 import { Gallery } from '../../../types/galleries/gallery.interface';
@@ -13,6 +13,7 @@ import { ImageDataComponent } from '../06-image-data/image-data.component';
 import { LayoutService } from '../../../services/layout.service';
 import { SettingsService } from '../../../services/settings.service';
 import { UtilityService } from '../../../services/utility.service';
+import { DownloadService } from '../../../services/download.service';
 
 @Component({
   selector: 'app-selected-image',
@@ -26,28 +27,30 @@ import { UtilityService } from '../../../services/utility.service';
 })
 export class SelectedImageComponent {
 
+  private layout = inject(LayoutService);
+  private settings = inject(SettingsService);
+  private utility = inject(UtilityService);
+  private download = inject(DownloadService);
+
   gallery = input.required<Gallery>();
   image = model.required<ImageData>();
   isOverlay = input<boolean>(false);
 
   imageIndex = computed<number>(() => this.imageIndexInGallery(this.gallery(), this.image()));
   imageName = computed<string>(() => this.constructImageName(this.gallery(), this.imageIndex()));
+  imagePath = computed<string>(() => this.constructImagePath(this.image()));
   previousIndex = computed<number>(() => this.getPreviousIndex(this.gallery(), this.imageIndex()));
   nextIndex = computed<number>(() => this.getNextIndex(this.gallery(), this.imageIndex()));
-  
+
   isLoading: boolean = true;
 
-  showImageInfo: Signal<boolean>;
-  isDesktopSmall = computed<boolean>(() => this.layout.screenWidth() === ScreenWidth.desktopSmall);
+  showImageInfo: Signal<boolean> = this.settings.showImageInfo;
+  isDesktopSmall = this.layout.isDesktopSmall;
 
-  constructor(
-    private layout: LayoutService,
-    private settings: SettingsService,
-    private utility: UtilityService
-  ) {
-    this.showImageInfo = this.settings.showImageInfo;
+  constructor() {
     effect(() => {
-      if (this.image()) this.isLoading = true;
+      this.image();
+      this.isLoading = true;
     });
   }
 
@@ -62,6 +65,10 @@ export class SelectedImageComponent {
 
   constructImageName(gallery: Gallery, index: number): string {
     return `${gallery.name.full} - Image ${index}`;
+  }
+
+  constructImagePath(image: ImageData): string {
+    return `${IMAGE_PATH}/${image.path}`;
   }
 
   getPreviousIndex(gallery: Gallery, index: number): number {
@@ -80,10 +87,11 @@ export class SelectedImageComponent {
     this.image.set(this.gallery().images[this.nextIndex() - 1]);
   }
 
-  downloadImage(url: string) {
+  downloadImage(url?: string) {
     if (!url) return;
-    const name: string = `${this.utility.toDashCase(this.gallery().name.full)}-image-${this.imageIndex()}`;
-    this.utility.downloadAsJPEG(url, name);
+    const name: string = 
+      `${this.utility.toDashCase(this.gallery().name.full)}-image-${this.imageIndex()}`;
+    this.download.downloadAsJPEG(url, name);
   }
 
   toggleOverlay(): void {

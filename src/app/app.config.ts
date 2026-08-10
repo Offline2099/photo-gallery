@@ -1,8 +1,7 @@
 import {
-  ApplicationConfig, 
-  provideAppInitializer,
+  ApplicationConfig,
   provideBrowserGlobalErrorListeners,
-  provideZoneChangeDetection,
+  provideAppInitializer,
   inject
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -15,16 +14,17 @@ import { RouteService } from './services/route.service';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
     provideAppInitializer(() => {
       const dataService = inject(DataService);
       const routeService = inject(RouteService);
       return firstValueFrom(
-        dataService.getGalleries().pipe(tap(galleries => {
-          if (galleries) routeService.constructDynamicRoutes(galleries)
-        }))
+        dataService.getGalleries().pipe(
+          tap(galleries => {
+            if (galleries) routeService.constructDynamicRoutes(galleries);
+          })
+        )
       );
     })
   ]

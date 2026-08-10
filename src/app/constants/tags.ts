@@ -55,7 +55,7 @@ export const TAG_GROUPS: TagGroup[] = [
       Tag.hills,
       Tag.islands,
       Tag.panorama
-    ],
+    ]
   },
   {
     name: 'Area Type',

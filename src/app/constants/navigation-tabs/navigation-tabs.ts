@@ -1,10 +1,5 @@
-import { NavigationTab } from '../types/ui/navigation-tab.interface';
-
-export enum NavigationTabId {
-  years,
-  places,
-  tags
-}
+import { NavigationTabId } from './navigation-tab-id.enum';
+import { NavigationTab } from '../../types/ui/navigation-tab.interface';
 
 export const NAVIGATION_TABS: NavigationTab[] = [
   {
@@ -14,7 +9,7 @@ export const NAVIGATION_TABS: NavigationTab[] = [
       short: 'Years'
     },
     isTwoColumnLayout: false,
-    countImages: true
+    showImageCount: true
   },
   {
     id: NavigationTabId.places,
@@ -23,7 +18,7 @@ export const NAVIGATION_TABS: NavigationTab[] = [
       short: 'Places'
     },
     isTwoColumnLayout: true,
-    countImages: false
+    showImageCount: false
   },
   {
     id: NavigationTabId.tags,
@@ -32,6 +27,6 @@ export const NAVIGATION_TABS: NavigationTab[] = [
       short: 'Tags'
     },
     isTwoColumnLayout: true,
-    countImages: false
+    showImageCount: false
   }
 ];
