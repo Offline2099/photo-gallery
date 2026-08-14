@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input, model, computed, effect } from '@angular/core';
+import { Component, inject, input, model, computed, effect } from '@angular/core';
 // Constants & Enums
 import { IMAGE_PATH, IMAGE_SMALL_PATH } from '../../../constants/paths';
 import {
@@ -33,18 +33,18 @@ export class GridModeGalleryComponent {
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
-  imagesInRow: Signal<number> = this.settings.imagesInRow;
+  imagesInRow = this.settings.imagesInRow;
 
-  galleryClass = computed<string>(() =>
+  galleryClass = computed(() =>
     this.constructGalleryClass(this.imagesInRow(), this.layout.isDesktop())
   );
-  areImagesSmall = computed<boolean>(() =>
+  areImagesSmall = computed(() =>
     this.shouldImagesBeSmall(this.imagesInRow(), this.layout.isDesktop())
   );
-  isOverlayAllowed = computed<boolean>(() =>
+  isOverlayAllowed = computed(() =>
     this.shouldOverlayBeAllowed(this.imagesInRow(), this.layout.isDesktop())
   );
-  isAnyDataVisible = computed<boolean>(() =>
+  isAnyDataVisible = computed(() =>
     this.settings.showImageCaptions() ||
     this.settings.showImageData() ||
     this.settings.showImageTags()

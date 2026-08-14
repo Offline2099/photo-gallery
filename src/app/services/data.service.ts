@@ -14,7 +14,7 @@ import { ImageData } from '../types/galleries/image-data.interface';
 import { UtilityService } from './utility.service';
 import { RouteService } from './route.service';
 
-const DATA_URL: string = 'data/image-data.json';
+const DATA_URL = 'data/image-data.json';
 
 type ImagesByYear = Record<number, ImageData[]>;
 type ImagesByYearAndMonth = Record<number, Record<number, ImageData[]>>;
@@ -29,9 +29,9 @@ export class DataService {
   private routes = inject(RouteService);
 
   private tagIndex = this.createTagIndexMap();
-  private areGalleriesConstructed: boolean = false;
-  
-  galleries: DefaultGalleries | null = null;  
+  private areGalleriesConstructed = false;
+
+  galleries: DefaultGalleries | null = null;
 
   getGalleries(): Observable<DefaultGalleries | null> {
     if (this.areGalleriesConstructed) return of(this.galleries as DefaultGalleries);
@@ -102,7 +102,7 @@ export class DataService {
         name: year,
         path: year,
         galleries: Object.entries(dataByMonth).map(([month, images]) => {
-          const monthName: string = this.utility.monthName(Number(month));
+          const monthName = this.utility.monthName(Number(month));
           return {
             type: GalleryType.month,
             name: {
@@ -138,7 +138,7 @@ export class DataService {
       id: `by-tag-${this.utility.toDashCase(group.name)}`,
       name: group.name,
       galleries: group.tags.map(tag => {
-        const capitalizedTag: string = this.utility.capitalizeFirstLetter(tag);
+        const capitalizedTag = this.utility.capitalizeFirstLetter(tag);
         return {
           type: GalleryType.tag,
           name: {
@@ -164,7 +164,7 @@ export class DataService {
   }
 
   private createTagIndexMap(): Map<string, number> {
-    return new Map<string, number>(this.allTags().map((tag, index) => [tag, index] as const));
+    return new Map(this.allTags().map((tag, index) => [tag, index] as const));
   }
 
   private allTags(): string[] {

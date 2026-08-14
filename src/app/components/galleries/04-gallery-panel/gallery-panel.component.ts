@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input, computed } from '@angular/core';
+import { Component, inject, input, computed } from '@angular/core';
 // Constants & Enums
 import { MAX_IMAGES_IN_ROW, MAX_IMAGES_IN_ROW_IF_NOT_WIDE } from '../../../constants/settings';
 // Interfaces
@@ -25,20 +25,18 @@ export class GalleryPanelComponent {
   gallery = input.required<Gallery>();
   isDefaultMode = input.required<boolean>();
 
-  displayedName = computed<string>(() =>
-    this.displayedGalleryName(this.gallery(), this.isDefaultMode())
-  );
+  displayedName = computed(() => this.displayedGalleryName(this.gallery(), this.isDefaultMode()));
 
-  isDesktop: Signal<boolean> = this.layout.isDesktop;
-  maxImagesInRow = computed<number>(() => this.getMaxImagesInRow(this.layout.isDesktopWide()));
+  isDesktop = this.layout.isDesktop;
+  maxImagesInRow = computed(() => this.getMaxImagesInRow(this.layout.isDesktopWide()));
 
-  isPanelVisible: Signal<boolean> = this.settings.isPanelVisible;
-  isMouseoverSelectAllowed: Signal<boolean> = this.settings.isMouseoverSelectAllowed;
-  showImageInfo: Signal<boolean> = this.settings.showImageInfo;
-  imagesInRow: Signal<number> = this.settings.imagesInRow;
-  showImageCaptions: Signal<boolean> = this.settings.showImageCaptions;
-  showImageData: Signal<boolean> = this.settings.showImageData;
-  showImageTags: Signal<boolean> = this.settings.showImageTags;
+  isPanelVisible = this.settings.isPanelVisible;
+  isMouseoverSelectAllowed = this.settings.isMouseoverSelectAllowed;
+  showImageInfo = this.settings.showImageInfo;
+  imagesInRow = this.settings.imagesInRow;
+  showImageCaptions = this.settings.showImageCaptions;
+  showImageData = this.settings.showImageData;
+  showImageTags = this.settings.showImageTags;
 
   displayedGalleryName(gallery: Gallery, isDefaultMode: boolean): string {
     return isDefaultMode

@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input, computed, linkedSignal } from '@angular/core';
+import { Component, inject, input, computed, linkedSignal } from '@angular/core';
 import { ActivationEnd, Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 // Constants & Enums
@@ -34,14 +34,14 @@ export class NavigationAreaComponent {
 
   galleries = input.required<DefaultGalleries | null>();
 
-  tabs = computed<NavigationTabData[]>(() => this.addTabData(NAVIGATION_TABS, this.galleries()));
-  selectedTab = linkedSignal<NavigationTabData>(() => this.tabs()[DEFAULT_TAB_INDEX]);
+  tabs = computed(() => this.addTabData(NAVIGATION_TABS, this.galleries()));
+  selectedTab = linkedSignal(() => this.tabs()[DEFAULT_TAB_INDEX]);
 
-  isCollapsed = computed<VisualState>(() => this.initialVisualState(this.tabs()));
+  isCollapsed = computed(() => this.initialVisualState(this.tabs()));
 
-  isDesktop: Signal<boolean> = this.layout.isDesktop;
-  isTablet: Signal<boolean> = this.layout.isTablet;
-  isMobile: Signal<boolean> = this.layout.isMobile;
+  isDesktop = this.layout.isDesktop;
+  isTablet = this.layout.isTablet;
+  isMobile = this.layout.isMobile;
 
   constructor() {
     this.router.events.pipe(takeUntilDestroyed()).subscribe(event => {
@@ -79,7 +79,7 @@ export class NavigationAreaComponent {
   }
 
   setTabByURL(url: string): void {
-    const index: number = this.routes.isLocationRoute(url)
+    const index = this.routes.isLocationRoute(url)
       ? this.tabs().findIndex(tab => tab.id === NavigationTabId.places)
       : this.routes.isTagRoute(url)
         ? this.tabs().findIndex(tab => tab.id === NavigationTabId.tags)

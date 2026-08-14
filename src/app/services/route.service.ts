@@ -13,7 +13,7 @@ export class RouteService {
   private router = inject(Router);
   private utility = inject(UtilityService);
 
-  private areRoutesConstructed: boolean = false;
+  private areRoutesConstructed = false;
 
   constructDynamicRoutes(galleries: DefaultGalleries): void {
     if (this.areRoutesConstructed) return;

@@ -24,14 +24,12 @@ export class LayoutService {
 
   private observer = inject(BreakpointObserver);
 
-  isMobile: Signal<boolean> = this.observe(BREAKPOINTS[Layout.mobile]);
-  isTablet: Signal<boolean> = this.observe(BREAKPOINTS[Layout.tablet]);
-  isDesktopSmall: Signal<boolean> = this.observe(BREAKPOINTS[Layout.desktopSmall]);
-  isDesktopAverage: Signal<boolean> = this.observe(BREAKPOINTS[Layout.desktopAverage]);
-  isDesktopWide: Signal<boolean> = this.observe(BREAKPOINTS[Layout.desktopWide]);
-  isDesktop = computed<boolean>(
-    () => this.isDesktopSmall() || this.isDesktopAverage() || this.isDesktopWide()
-  );
+  isMobile = this.observe(BREAKPOINTS[Layout.mobile]);
+  isTablet = this.observe(BREAKPOINTS[Layout.tablet]);
+  isDesktopSmall = this.observe(BREAKPOINTS[Layout.desktopSmall]);
+  isDesktopAverage = this.observe(BREAKPOINTS[Layout.desktopAverage]);
+  isDesktopWide = this.observe(BREAKPOINTS[Layout.desktopWide]);
+  isDesktop = computed(() => !this.isMobile() && !this.isTablet());
 
   private observe(feature: string): Signal<boolean> {
     return toSignal(

@@ -3,19 +3,19 @@ import { Service, signal } from '@angular/core';
 @Service()
 export class SettingsService {
 
-  isDefaultModeByTime = signal<boolean>(true);
-  isDefaultModeByData = signal<boolean>(false);
+  isDefaultModeByTime = signal(true);
+  isDefaultModeByData = signal(false);
 
-  isPanelVisible = signal<boolean>(false);
-  isOverlayVisible = signal<boolean>(false);
+  isPanelVisible = signal(false);
+  isOverlayVisible = signal(false);
 
-  isMouseoverSelectAllowed = signal<boolean>(false);
-  showImageInfo = signal<boolean>(true);
+  isMouseoverSelectAllowed = signal(false);
+  showImageInfo = signal(true);
 
-  imagesInRow = signal<number>(3);
-  showImageCaptions = signal<boolean>(true);
-  showImageData = signal<boolean>(false);
-  showImageTags = signal<boolean>(false);
+  imagesInRow = signal(3);
+  showImageCaptions = signal(true);
+  showImageData = signal(false);
+  showImageTags = signal(false);
 
   toggleDefaultModeByTime(): void {
     this.isDefaultModeByTime.update(value => !value);

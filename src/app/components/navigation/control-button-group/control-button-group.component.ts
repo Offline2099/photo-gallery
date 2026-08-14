@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input, model, computed } from '@angular/core';
+import { Component, inject, input, model, computed } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { GalleryGroup } from '../../../types/galleries/gallery-group.interface';
 import { ControlButtonComponent } from '../../ui-elements/control-button/control-button.component';
@@ -19,12 +19,12 @@ export class ControlButtonGroupComponent {
   isCollapsed = model.required<boolean>();
   showImageCount = input.required<boolean>();
 
-  isDesktop: Signal<boolean> = this.layout.isDesktop;
-  label = computed<string>(() => this.constructLabel(this.group(), this.showImageCount()));
+  isDesktop = this.layout.isDesktop;
+  label = computed(() => this.constructLabel(this.group(), this.showImageCount()));
 
   constructLabel(group: GalleryGroup, showImageCount: boolean): string {
-    const galleryCount: string = `${group.galleries.length} galleries`;
-    const imageCount: string = showImageCount
+    const galleryCount = `${group.galleries.length} galleries`;
+    const imageCount = showImageCount
       ? `${group.galleries.reduce((acc, gallery) => acc + gallery.images.length, 0)} images`
       : '';
     return `(${galleryCount}${showImageCount ? ', ' : ''}${imageCount})`;

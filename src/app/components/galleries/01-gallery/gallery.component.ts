@@ -39,12 +39,8 @@ export class GalleryComponent {
   gallery: Gallery = this.route.snapshot.data['gallery'];
   selectedImage: ImageData | null = this.gallery.images[0] || null;
 
-  isDefaultMode = computed<boolean>(() =>
-    this.isDefaultGalleryMode(this.gallery, this.layout.isDesktop())
-  );
-  isOverlayVisible = computed<boolean>(
-    () => this.layout.isDesktop() && this.settings.isOverlayVisible()
-  );
+  isDefaultMode = computed(() => this.isDefaultGalleryMode(this.gallery, this.layout.isDesktop()));
+  isOverlayVisible = computed(() => this.layout.isDesktop() && this.settings.isOverlayVisible());
 
   scrollTarget = viewChild<ElementRef>('scrollTarget');
 
@@ -74,7 +70,7 @@ export class GalleryComponent {
   preloadImages(gallery: Gallery): void {
     if (!gallery.images.length) return;
     const preload = (index: number) => {
-      const img: HTMLImageElement = new Image();
+      const img = new Image();
       img.src = `${IMAGE_PATH}/${gallery.images[index].path})`;
       if (index === gallery.images.length - 1) return;
       img.onload = () => {

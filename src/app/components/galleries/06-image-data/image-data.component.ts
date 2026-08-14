@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input, computed } from '@angular/core';
+import { Component, inject, input, computed } from '@angular/core';
 import { NgTemplateOutlet } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 // Constants & Enums
@@ -34,7 +34,7 @@ interface TagData {
   tagURL: string;
 }
 
-const DEFAULT_TAB_INDEX: number = 0;
+const DEFAULT_TAB_INDEX = 0;
 
 @Component({
   selector: 'app-image-data',
@@ -55,26 +55,24 @@ export class ImageDataComponent {
 
   gallery = input.required<Gallery>();
   data = input.required<ImageData>();
-  hasTabs = input<boolean>(false);
+  hasTabs = input(false);
 
-  showImageCaptions: Signal<boolean> = this.settings.showImageCaptions;
-  showImageData: Signal<boolean> = this.settings.showImageData;
-  showImageTags: Signal<boolean> = this.settings.showImageTags;
+  showImageCaptions = this.settings.showImageCaptions;
+  showImageData = this.settings.showImageData;
+  showImageTags = this.settings.showImageTags;
 
-  dataTabs = computed<ImageDataTab[]>(() =>
-    this.constructDataTabs(this.hasTabs(), this.data(), this.gallery())
-  );
-  selectedTabIndex: number = DEFAULT_TAB_INDEX;
+  dataTabs = computed(() => this.constructDataTabs(this.hasTabs(), this.data(), this.gallery()));
+  selectedTabIndex = DEFAULT_TAB_INDEX;
 
-  location = computed<LocationData | null>(() => this.locationData(this.data()));
-  time = computed<TimeData>(() => this.timeData(this.data()));
-  tags = computed<TagData[]>(() => this.tagsData(this.data()));
+  location = computed(() => this.locationData(this.data()));
+  time = computed(() => this.timeData(this.data()));
+  tags = computed(() => this.tagsData(this.data()));
 
-  locationIcon: string = this.routes.iconRoute('location-icon');
-  timeIcon: string = this.routes.iconRoute('calendar-icon');
-  tagIcon: string = this.routes.iconRoute('tag-icon');
+  locationIcon = this.routes.iconRoute('location-icon');
+  timeIcon = this.routes.iconRoute('calendar-icon');
+  tagIcon = this.routes.iconRoute('tag-icon');
 
-  currentURL: string = '';
+  currentURL = '';
 
   ngOnInit(): void {
     this.currentURL = `/${this.route.snapshot.url.join('/')}`;
@@ -102,7 +100,9 @@ export class ImageDataComponent {
         ? `(${data.location.coords.lat} N, ${data.location.coords.lon} E)`
         : '',
       nameURL: `/${this.routes.locationRoute(data.location.name)}`,
-      areaURL: data.location.areaName ? `/${this.routes.locationRoute(data.location.areaName)}` : ''
+      areaURL: data.location.areaName
+        ? `/${this.routes.locationRoute(data.location.areaName)}`
+        : ''
     };
   }
 

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { DefaultGalleries } from './types/galleries/default-galleries.interface';
-import { NavigationAreaComponent } from './components/navigation/navigation-area/navigation-area.component';
+import { NavigationAreaComponent }
+  from './components/navigation/navigation-area/navigation-area.component';
 import { DataService } from './services/data.service';
 
 @Component({
@@ -13,6 +13,6 @@ import { DataService } from './services/data.service';
 export class App {
 
   private data = inject(DataService);
-  readonly galleries: DefaultGalleries | null = this.data.galleries;
+  readonly galleries = this.data.galleries;
 
 }

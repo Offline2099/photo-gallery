@@ -1,11 +1,11 @@
 import { Service } from '@angular/core';
 
-const MONTHS_IN_YEAR: number = 12;
+const MONTHS_IN_YEAR = 12;
 
 @Service()
 export class UtilityService {
 
-  private readonly MONTH_NAMES: string[] = this.getMonthNames();
+  private readonly MONTH_NAMES = this.getMonthNames();
 
   monthName(month: number): string {
     if (month < 1 || month > MONTHS_IN_YEAR) return '';

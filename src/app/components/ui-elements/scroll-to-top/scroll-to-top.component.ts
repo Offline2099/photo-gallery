@@ -15,10 +15,10 @@ import { ViewportScroller } from '@angular/common';
 export class ScrollToTopComponent {
 
   private scroller = inject(ViewportScroller);
-  verticalOffset: number = 0;
+  verticalOffset = 0;
 
   onScroll(): void {
-    const [_, y]: number[] = this.scroller.getScrollPosition();
+    const [_, y] = this.scroller.getScrollPosition();
     this.verticalOffset = y;
   }
 

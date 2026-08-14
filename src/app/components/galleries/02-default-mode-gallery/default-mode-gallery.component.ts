@@ -11,8 +11,8 @@ import { GalleryPanelComponent } from '../04-gallery-panel/gallery-panel.compone
 // Services
 import { SettingsService } from '../../../services/settings.service';
 
-const NONE_SELECTED: number = -1;
-const MOUSEOVER_SELECT_DELAY_MS: number = 300;
+const NONE_SELECTED = -1;
+const MOUSEOVER_SELECT_DELAY_MS = 300;
 
 @Component({
   selector: 'app-default-mode-gallery',
@@ -29,7 +29,7 @@ export class DefaultModeGalleryComponent {
   gallery = input.required<Gallery>();
   selectedImage = model.required<ImageData>();
 
-  mouseoverIndex: number = NONE_SELECTED;
+  mouseoverIndex = NONE_SELECTED;
 
   selectImage(image: ImageData): void {
     this.selectedImage.set(image);

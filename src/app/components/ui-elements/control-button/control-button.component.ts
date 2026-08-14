@@ -13,15 +13,15 @@ export class ControlButtonComponent {
 
   private routes = inject(RouteService);
 
-  hasSwitch = input<boolean>(false);
-  isSwitchOn = input<boolean>(false);
-  icon = input<string>('');
-  secondIcon = input<string>('');
-  textBefore = input<string>('');
-  text = input<string>('');
-  textAfter = input<string>('');
-  label = input<string>('');
-  isSelected = input<boolean>(false);
+  hasSwitch = input(false);
+  isSwitchOn = input(false);
+  icon = input('');
+  secondIcon = input('');
+  textBefore = input('');
+  text = input('');
+  textAfter = input('');
+  label = input('');
+  isSelected = input(false);
 
   iconSrc = computed(() => this.routes.iconRoute(this.icon()));
   secondIconSrc = computed(() => this.routes.iconRoute(this.secondIcon()));

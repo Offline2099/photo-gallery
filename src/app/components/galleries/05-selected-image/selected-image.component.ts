@@ -1,4 +1,4 @@
-import { Component, Signal, inject, input, model, computed, effect } from '@angular/core';
+import { Component, inject, input, model, computed, effect } from '@angular/core';
 import { NgClass } from '@angular/common';
 // Constants & Enums
 import { IMAGE_PATH } from '../../../constants/paths';
@@ -34,17 +34,17 @@ export class SelectedImageComponent {
 
   gallery = input.required<Gallery>();
   image = model.required<ImageData>();
-  isOverlay = input<boolean>(false);
+  isOverlay = input(false);
 
-  imageIndex = computed<number>(() => this.imageIndexInGallery(this.gallery(), this.image()));
-  imageName = computed<string>(() => this.constructImageName(this.gallery(), this.imageIndex()));
-  imagePath = computed<string>(() => this.constructImagePath(this.image()));
-  previousIndex = computed<number>(() => this.getPreviousIndex(this.gallery(), this.imageIndex()));
-  nextIndex = computed<number>(() => this.getNextIndex(this.gallery(), this.imageIndex()));
+  imageIndex = computed(() => this.imageIndexInGallery(this.gallery(), this.image()));
+  imageName = computed(() => this.constructImageName(this.gallery(), this.imageIndex()));
+  imagePath = computed(() => this.constructImagePath(this.image()));
+  previousIndex = computed(() => this.getPreviousIndex(this.gallery(), this.imageIndex()));
+  nextIndex = computed(() => this.getNextIndex(this.gallery(), this.imageIndex()));
 
-  isLoading: boolean = true;
+  isLoading = true;
 
-  showImageInfo: Signal<boolean> = this.settings.showImageInfo;
+  showImageInfo = this.settings.showImageInfo;
   isDesktopSmall = this.layout.isDesktopSmall;
 
   constructor() {
@@ -87,10 +87,9 @@ export class SelectedImageComponent {
     this.image.set(this.gallery().images[this.nextIndex() - 1]);
   }
 
-  downloadImage(url?: string) {
+  downloadImage(url?: string): void {
     if (!url) return;
-    const name: string = 
-      `${this.utility.toDashCase(this.gallery().name.full)}-image-${this.imageIndex()}`;
+    const name = `${this.utility.toDashCase(this.gallery().name.full)}-image-${this.imageIndex()}`;
     this.download.downloadAsJPEG(url, name);
   }
 
